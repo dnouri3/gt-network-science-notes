@@ -1,0 +1,50 @@
+{
+  "content/gt-nsci-L1.qmd": {
+    "lecture-1.html": "f1f1c7c4"
+  },
+  "content/gt-nsci-L10.qmd": {
+    "lecture-10.html": "15cb3bb3"
+  },
+  "content/gt-nsci-L11.qmd": {
+    "lecture-11.html": "95df2496"
+  },
+  "content/gt-nsci-L12.qmd": {
+    "lecture-12.html": "11ef5641"
+  },
+  "content/gt-nsci-L13.qmd": {
+    "lecture-13.html": "09ac6cf1"
+  },
+  "content/gt-nsci-L14.qmd": {
+    "lecture-14.html": "7fdf16b9"
+  },
+  "content/gt-nsci-L2.qmd": {
+    "lecture-2.html": "f2bcf12b"
+  },
+  "content/gt-nsci-L3.qmd": {
+    "lecture-3.html": "e6a76bd9"
+  },
+  "content/gt-nsci-L4.qmd": {
+    "lecture-4.html": "e4161c68"
+  },
+  "content/gt-nsci-L5.qmd": {
+    "lecture-5.html": "a570e9f5"
+  },
+  "content/gt-nsci-L6.qmd": {
+    "lecture-6.html": "618e4b95"
+  },
+  "content/gt-nsci-L7.qmd": {
+    "lecture-7.html": "26d69e46"
+  },
+  "content/gt-nsci-L8.qmd": {
+    "lecture-8.html": "2cdb7eab"
+  },
+  "content/gt-nsci-L9.qmd": {
+    "lecture-9.html": "6c781b57"
+  },
+  "content/index.qmd": {
+    "index.html": "bc434b76"
+  },
+  "content/quick-reference.qmd": {
+    "quick-reference.html": "758f5fc3"
+  }
+}
