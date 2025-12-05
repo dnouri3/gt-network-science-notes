@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>gt-nsci-l4 – GT Network Science Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecture-5.html" rel="next">
+<link href="./lecture-3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f503c0b15d9f8f334cec1fc4b8652841.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-54f67416df7f62e5f91c855543863998.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  </head><body class="nav-sidebar floating quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>true
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="default_style.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture-4.html">Lecture 4</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Science - CS 7280 OMSCS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quick-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quick Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 11</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 13</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 14</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#l4-power-law-networks" id="toc-l4-power-law-networks" class="nav-link active" data-scroll-target="#l4-power-law-networks">L4: Power-Law Networks</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#degree-distribution-of-real-networks" id="toc-degree-distribution-of-real-networks" class="nav-link" data-scroll-target="#degree-distribution-of-real-networks">Degree Distribution of Real Networks</a></li>
+  <li><a href="#power-law-degree-distribution" id="toc-power-law-degree-distribution" class="nav-link" data-scroll-target="#power-law-degree-distribution">Power-law Degree Distribution​</a></li>
+  <li><a href="#the-role-of-the-exponent-of-a-power-law-distribution" id="toc-the-role-of-the-exponent-of-a-power-law-distribution" class="nav-link" data-scroll-target="#the-role-of-the-exponent-of-a-power-law-distribution">The Role of the Exponent of a Power-law Distribution</a></li>
+  <li><a href="#how-to-check-if-a-network-has-power-law-degree-distribution" id="toc-how-to-check-if-a-network-has-power-law-degree-distribution" class="nav-link" data-scroll-target="#how-to-check-if-a-network-has-power-law-degree-distribution">How to Check if a Network Has Power-law Degree Distribution​</a></li>
+  <li><a href="#how-to-plot-power-law-degree-distribution" id="toc-how-to-plot-power-law-degree-distribution" class="nav-link" data-scroll-target="#how-to-plot-power-law-degree-distribution">How to Plot Power-law Degree Distribution​</a></li>
+  <li><a href="#scale-free-nature-of-power-law-networks" id="toc-scale-free-nature-of-power-law-networks" class="nav-link" data-scroll-target="#scale-free-nature-of-power-law-networks">Scale-free Nature of Power-law Networks​</a></li>
+  <li><a href="#the-maximum-degree-in-a-power-law-network" id="toc-the-maximum-degree-in-a-power-law-network" class="nav-link" data-scroll-target="#the-maximum-degree-in-a-power-law-network">The Maximum Degree in a Power-law Network​</a></li>
+  <li><a href="#random-failures-and-targeted-attacks-in-power-law-networks" id="toc-random-failures-and-targeted-attacks-in-power-law-networks" class="nav-link" data-scroll-target="#random-failures-and-targeted-attacks-in-power-law-networks">Random Failures and Targeted Attacks in Power-law Networks</a></li>
+  <li><a href="#degree-preserving-randomization" id="toc-degree-preserving-randomization" class="nav-link" data-scroll-target="#degree-preserving-randomization">Degree-preserving Randomization​</a></li>
+  <li><a href="#the-average-degree-of-the-nearest-neighbor-at-a-power-law-network" id="toc-the-average-degree-of-the-nearest-neighbor-at-a-power-law-network" class="nav-link" data-scroll-target="#the-average-degree-of-the-nearest-neighbor-at-a-power-law-network">The Average Degree of the Nearest Neighbor at a Power-law Network​</a></li>
+  <li><a href="#configuration-model" id="toc-configuration-model" class="nav-link" data-scroll-target="#configuration-model">Configuration Model​</a></li>
+  <li><a href="#preferential-attachment-model" id="toc-preferential-attachment-model" class="nav-link" data-scroll-target="#preferential-attachment-model">Preferential Attachment Model​</a></li>
+  <li><a href="#link-selection-model" id="toc-link-selection-model" class="nav-link" data-scroll-target="#link-selection-model">Link Selection Model​</a></li>
+  <li><a href="#what-does-the-power-law-property-mean-in-practice" id="toc-what-does-the-power-law-property-mean-in-practice" class="nav-link" data-scroll-target="#what-does-the-power-law-property-mean-in-practice">What Does The Power-law Property Mean in Practice?</a></li>
+  <li><a href="#case-studies-superspreaders" id="toc-case-studies-superspreaders" class="nav-link" data-scroll-target="#case-studies-superspreaders">Case Studies: Superspreaders</a></li>
+  <li><a href="#lesson-summary" id="toc-lesson-summary" class="nav-link" data-scroll-target="#lesson-summary">Lesson Summary</a></li>
+  <li><a href="#assortative-neutral-and-disassortative-networks" id="toc-assortative-neutral-and-disassortative-networks" class="nav-link" data-scroll-target="#assortative-neutral-and-disassortative-networks">Assortative, Neutral and Disassortative Networks</a></li>
+  <li><a href="#lesson-summary-1" id="toc-lesson-summary-1" class="nav-link" data-scroll-target="#lesson-summary-1">Lesson Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<hr>
+<div class="lecture-nav">
+<p><a href="./lecture-3.html" class="nav-prev">← Lecture 3</a> <a href="./lecture-5.html" class="nav-next">Lecture 5 →</a></p>
+</div>
+<section id="l4-power-law-networks" class="level2">
+<h2 class="anchored" data-anchor-id="l4-power-law-networks">L4: Power-Law Networks</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Readings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Required Reading</strong></p>
+<ul>
+<li>Chapter 4 (sections 4.1, 4.2, 4.3, 4.4., 4.7, 4.8, 4.12), A-L. Barabási , <a href="http://barabasi.com/networksciencebook/">Network Science</a>, 2015.</li>
+<li>Chapter 5 (sections 5.1, 5.2, 5.3), A-L. Barabási ,<a href="http://barabasi.com/networksciencebook/">Network Science</a> 2015</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="degree-distribution-of-real-networks" class="level3">
+<h3 class="anchored" data-anchor-id="degree-distribution-of-real-networks">Degree Distribution of Real Networks</h3>
+<p>What is the degree distribution of real networks?</p>
+<ul>
+<li>Scientists used to think that real networks can be modeled as random ER graphs.</li>
+<li>Such networks follow the binomial degree distribution.</li>
+<li>In the late 1990s, researchers observed that real networks are very different, with highly skewed degree distribution.</li>
+<li>For many networks, the power law degree distribution <span class="math inline">\(p_k \sim k^{-\alpha}\)</span> is a more appropriate model.</li>
+</ul>
+<p><img src="assets/L4_DD1.png" class="img-fluid"></p>
+<p>For instance, the plots that you see here illustrate the measured degree distribution of an older internet topology at the router level, a protein-protein interaction network, an email social network, which shows basically who sends email to whom and a citation network showing which papers cite other papers.</p>
+<p>Note that the last two networks are directed and so the corresponding plots show separately, the in-degree and the out-degree distributions. You can find more information about these networks in table 41 of your textbook.</p>
+<p>The plot also shows in green (the second plot), the poisson distribution with the same average degree as the observed network. c <img src="assets/L4_DD2.png" class="img-fluid"></p>
+<p>Please note the following points about these plots:</p>
+<ul>
+<li>The poisson distribution is clearly a very bad model because it cannot capture the large variability and skewness of the degree distribution of these networks.</li>
+<li>The plots are shown in the log-log scale and the degree distributions decreases roughly as straight lines</li>
+<li>This means that the probability that a node has degree k drops as a power-law of <span class="math inline">\(k:p_k \sim k^{-\alpha}\)</span>. The slope of that straight line corresponds to the exponent of the power-law <span class="math inline">\(\alpha\)</span>.</li>
+</ul>
+<p>This observation is not just a statistical technicality. The fact that the real world networks often follow a power-law degree distribution has major implications about the function robustness and efficiency as we will see later in the semester.</p>
+<p>To further visualize the differences between a poisson and power law distribution, here are two distributions in both linear-linear and log-log scales.</p>
+<p><img src="assets/L4_DD3.png" class="img-fluid"></p>
+<p>The poisson distribution has an average degree of 11 here, while the power-law distribution has a lowered average degree set to 3, and the exponent is 2.1. The linear-linear plot shows that almost bell-shaped form of the poisson distribution centered around its mean. The power-law distribution on the other hand is not centered around the specific value. The major difference between the two distributions becomes clear in log-log scale. We see that the poisson distribution cannot produce values that are much larger than its average.</p>
+<p>In this example, the maximum value of the poisson distribution is roughly 30, almost 3 times larger than the mean. The power-law distribution extends over three orders of magnitude and there is a non negligible probability that we get values that are much greater than its mean.</p>
+<p><img src="assets/L4_DD4.png" class="img-fluid"></p>
+<p>The visualization here, shows 2 networks with 50 nodes. They both have the same average degree equal to 3. The network at the left follows the poisson distribution, while the network at the right follows a power-law distribution with exponent 2.1.</p>
+<p>The size of the nodes is drawn to be proportional to the degree. Note that the poisson network is uniform looking, there is not much variability in the degree of different nodes. The power-law network on the other hand, is very heterogeneous in that respect, some nodes are completely disconnected, many nodes have a degree of only 1 while 2 or 3 nodes have a much higher degree than the average. It is those nodes that we refer to as hubs.</p>
+</section>
+<section id="power-law-degree-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="power-law-degree-distribution">Power-law Degree Distribution​</h3>
+<p>A <strong>“power-law network”</strong> has a degree distribution that is defined by the following equation:​</p>
+<p><span class="math display">\[
+p_k = ck^{-\alpha}
+\]</span></p>
+<p>In other words, the probability that the degree of a node is equal to a positive integer <span class="math inline">\(k\)</span> is proportional to <span class="math inline">\(k^{-\alpha}\)</span> where <span class="math inline">\(\alpha\)</span> &gt;0. ​</p>
+<p>The proportionality coefficient c is calculated so that the sum of all degree probabilities is equal to one for a given <span class="math inline">\(\alpha\)</span> and a given minimum degree <span class="math inline">\(k_{\text{min}}\)</span> (the minimum degree may not always be 1). ​</p>
+<p><span class="math display">\[
+\sum_{k=k_{\text{min}}}^\infty p_k = 1
+\]</span></p>
+<p>The calculation of <strong>c</strong> can be simplified if we approximate the discrete degree distribution with a continuous distribution:​</p>
+<p><span class="math display">\[
+\begin{aligned}
+\,  \, \int_{k=k_{min}}^{\infty} p_k =  \, c\int_{k=k_{min}}^{\infty} k^{-\alpha} = - \frac{c}{\alpha-1} k^{-(\alpha-1)} |_{k_{min}}^{\infty} = \frac{c}{\alpha-1} k_{min}^{-(\alpha-1)} = 1
+\end{aligned}
+\]</span></p>
+<p>which gives:</p>
+<p><span class="math display">\[
+c = \left(\alpha-1\right) \, {k_{min}^{\alpha-1}}​
+\]</span></p>
+<p>So, the complete equation for a power-law degree distribution is:​</p>
+<p><span class="math display">\[
+p_k= \frac{\alpha-1}{k_{min}} \, \bigg(\frac{k}{k_{min}}\bigg)^{-\alpha}​
+\]</span></p>
+<p>The Complementary Cumulative Distribution Function (C-CDF) is:​</p>
+<p><span class="math display">\[
+P[\mbox{degree} \geq k] = \bigg(\frac{k}{k_{min}}\bigg)^{-(\alpha-1)}​
+\]</span></p>
+<p>Note that the exponent of the CCDF function is <span class="math inline">\(\alpha-1\)</span>, instead of <span class="math inline">\(\alpha\)</span>. So, if the probability that a node has degree <span class="math inline">\(k\)</span> decays with a power-law exponent of 3, the probability that we see nodes with degree greater than <span class="math inline">\(k\)</span> decays with an exponent of 2. ​</p>
+<p>For directed networks, we can have that the in-degree or the out-degree or both follow a power-law distribution (<em>with potentially different exponents</em>). ​</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p><strong>Prompt 1</strong>: Repeat the derivations given here in more detail. ​</p>
+<p><strong>Prompt 2</strong>: Can you think of a network with n nodes in which all nodes have about the same in-degree but the out-degrees are highly skewed?​</p>
+</blockquote>
+</section>
+<section id="the-role-of-the-exponent-of-a-power-law-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="the-role-of-the-exponent-of-a-power-law-distribution">The Role of the Exponent of a Power-law Distribution</h3>
+<p>What is the mean and the variance of a power-law degree distribution? ​</p>
+<p>More generally we can ask: what is the m’th statistical moment of a power-law degree distribution? ​ It is defined as: ​</p>
+<p><span class="math display">\[
+E[k^m] = \sum _{k_{min}}^{\infty} k^m p_k = c \sum _{k_{min}}^{\infty} k^{m-\alpha}​
+\]</span></p>
+<p>where <strong>c</strong> is the proportionality coefficient we derived in the previous page. ​</p>
+<p>If we rely again on the continuous <span class="math inline">\(k\)</span> approximation, the previous summation becomes an integral that we can easily calculate:​</p>
+<p><span class="math display">\[
+E[k^m] = c \int_{k_{min}}^{\infty} k^{m-\alpha} {dk} = \frac{c}{m-\alpha+1} k^{m-\alpha+1} |_{k_{min}}^{\infty}
+\]</span></p>
+<p>Note that this integral diverges to infinity if <span class="math inline">\(m -\alpha+1\geq 0\)</span> and so, the m’th moment of a power-law degree distribution is well defined (finite) if <span class="math inline">\(m &lt; \alpha -1\)</span>.</p>
+<p>Consequently, the mean (first moment) exists if <span class="math inline">\(\alpha&gt;2\)</span> ​and the variance (second moment minus the square of the mean) exists if <span class="math inline">\(\alpha&gt;3\)</span>.</p>
+<p>Of course the variance cannot be “infinite” if the network has a finite number of nodes (i.e., <span class="math inline">\(k\)</span> never ”extends to infinity” in real networks). For many real-world networks however, the exponent <span class="math inline">\(\alpha\)</span> is estimated to be between 2 and 3, which means that even though the distribution has a well-defined average degree, the variability of the degree across different nodes is extremely large. ​</p>
+<p><img src="assets/L4_role1.jpeg" class="img-fluid"> <em>Standard Deviation is Large in Real Networks, Figure 4.8 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>To illustrate this last point, let’s look at the relation between the average degree and the standard deviation of the degree distribution for several real-networks (for more details about these networks please review Table 4.1 of your textbook). ​</p>
+<p>For a network with Poisson degree distribution (such as random ER graphs), the degree variance is equal to the average degree <span class="math inline">\(\left(E[k]=\bar{k}=\sigma^2\right)\)</span> and so <span class="math inline">\(\sigma = \sqrt{\bar{k}}\)</span></p>
+<p>Note that many real-world networks have much higher <span class="math inline">\(\sigma\)</span> than that – in some cases <span class="math inline">\(\sigma\)</span> is even an order of magnitude larger than <span class="math inline">\(\bar{k}\)</span>. ​In the case of the WWW in-degree distribution, for example, the average in-degree is only around 4 while the standard deviation of the in-degree is almost 40!​</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p><strong>Prompt</strong>: repeat the derivation for the m’th moment outlined above in more detail. ​</p>
+</blockquote>
+</section>
+<section id="how-to-check-if-a-network-has-power-law-degree-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-check-if-a-network-has-power-law-degree-distribution">How to Check if a Network Has Power-law Degree Distribution​</h3>
+<p><img src="assets/L4_PLD1.jpeg" class="img-fluid"> <em>Rescaling the Degree Distribution, Figure 4.23 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>In practice, the degree distribution may not follow an ideal power-law distribution throughout the entire range of degrees. In other words, the empirical degree distribution may not be a perfect straight-line when plotted in log-log scale. Instead, it may look similar to the left plot at this page. There are two important points about this distribution:​​</p>
+<ol type="1">
+<li><p>For lower values of <span class="math inline">\(k\)</span>, we observe a “low-degree saturation” that decreases the probability of seeing low-degree nodes compared to an ideal power-law. If this saturation effect takes place mostly for nodes with degree less than <span class="math inline">\(k_{\text{sat}}\)</span>, we can capture this effect by considering a modified power-law expression: <span class="math inline">\((k+k_{\text{sat}})^{-\alpha}\)</span>.</p>
+<p>Do you see why adding the term <span class="math inline">\(k_{\text{sat}}\)</span> causes a decrease in the probability of low-degree nodes (but it has a minor effect on high-degree nodes)? ​</p></li>
+<li><p>For very high values of <span class="math inline">\(k\)</span> there is again a deviation from the ideal power-law form. The reason is that in practice there are always some “structural” effects that limit the maximum degree that a node can have. For example, in a router-level computer network, the maximum degree is limited by the maximum number of interfaces that a router can have due to hardware or cost constraints. To capture such a high-degree cutoff point, we often need to constrain the upper-tail of the degree distribution up to a value <span class="math inline">\(k_{\text{cut}}\)</span>. This value is determined by practical connectivity constraints for the network we analyze. ​</p>
+<p>In summary, when we want to check if a network follows a power-law degree distribution, we need to consider whether that distribution drops almost linearly with <span class="math inline">\(k\)</span> in a range between <span class="math inline">\(k_{\text{sat}}\)</span> and <span class="math inline">\(k_{\text{cut}}\)</span></p></li>
+</ol>
+<p>Another approach, that addresses the low-degree saturation effect, is to “rescale” the distribution so that we examine the behavior of the degree probability with <span class="math inline">\((k+k_{\text{cut}})\)</span> (instead of <span class="math inline">\(k\)</span>) - still considering the range up to <span class="math inline">\(k_{\text{cut}}\)</span>. This rescaling approach is shown at the plot at the right. ​</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>A more rigorous statistical approach to examine if a network has a power-law degree distribution is described at the following site: <a href="https://aaronclauset.github.io/powerlaws/">Power-law Distributions in Empirical Data</a>. You will experiment with this (or similar) method in an assignment. For now, you may just want to read the description of that method from the given URL. ​</p>
+</blockquote>
+</section>
+<section id="how-to-plot-power-law-degree-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-plot-power-law-degree-distribution">How to Plot Power-law Degree Distribution​</h3>
+<p><img src="assets/L4_PLD2.jpeg" class="img-fluid"> <em>Plotting a Degree Distributions, Image 4.22 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>There are several ways to plot a power-law distribution – but not all of them are good and some of them can even be misleading. ​</p>
+<p>This plot visualizes the same distribution, <span class="math inline">\(p_k = c' (k + k_0)^{-\alpha}\)</span>, with <span class="math inline">\(k_0 = 10\)</span> and <span class="math inline">\(\alpha=2.5\)</span>, in four different ways. The term <span class="math inline">\(k_0 = 10\)</span> causes the “low-degree saturation” that you see at the left tail of the distribution, decreasing the probability of lower-degrees.</p>
+<p><strong>The four plots are:​</strong></p>
+<ol type="1">
+<li>linear-linear scale. This is clearly a bad way to plot a power-law distribution. ​</li>
+<li>log-log scale but with linear binning (the bin width of the histogram increases linearly with <span class="math inline">\(k\)</span>). This is also not an appropriate approach because the bins of the histogram for high values of <span class="math inline">\(k\)</span> are quite narrow and they often include 0 or 1 measurements, creating the “plateau” that you see at the tail of the distribution. ​</li>
+<li>log-log scale but with logarithmic binning (the bin width of the histogram increases exponentially with <span class="math inline">\(k\)</span>). Note how the tail of the distribution drops almost linearly with <span class="math inline">\(k\)</span> when the degree is higher than about 50-100. A potential issue with this approach is that we still need to figure out how fast to increase the bin width with <span class="math inline">\(k\)</span>. ​</li>
+<li>the Complementary Cumulative Distribution Function (C-CDF), which shows the probability <span class="math inline">\(P_k\)</span> that the degree is higher or equal than <span class="math inline">\(k\)</span> (all previous plots show the probability <span class="math inline">\(p_k\)</span> that the degree is equal to <span class="math inline">\(k\)</span>). This is the best approach because we do not need to determine an appropriate sequence of bin-widths. Please note however that the slope of the C-CDF is not the same as the slope of the degree distribution. In this example, <span class="math inline">\(\alpha=2.5\)</span> and so the exponent of the C-CDF is 1.5.​</li>
+</ol>
+</section>
+<section id="scale-free-nature-of-power-law-networks" class="level3">
+<h3 class="anchored" data-anchor-id="scale-free-nature-of-power-law-networks">Scale-free Nature of Power-law Networks​</h3>
+<p><img src="assets/L4_scalefree.jpeg" class="img-fluid"> <em>Lack of an Internal Scale, figure 4.7 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>One of the first things we learn in statistics is that the Normal distribution describes quite accurately many random variables (due to the Central Limit Theorem), and that according to that distribution 99.8% of the data are expected to fall within 3 standard deviations from the average.</p>
+<p>Qualitatively, this is true for all distributions with exponentially fast decreasing tails, which includes the Poisson distribution and many others. In networks that have such degree distributions, the average degree represents the “<strong>typical scale</strong>” of the network, in terms of the number of connections per node (see green distribution at the visualization). ​</p>
+<p>On the other hand, a power-law degree distribution with exponent <span class="math inline">\(2&lt;\alpha&lt;3\)</span> has finite mean but infinite variance (any higher moments, such as skewness are also infinite). The infinite variance of this statistical distribution means that we cannot expect the data to fall close to the mean. On the contrary, the mean (the average node degree in our case) can be a rather uninformative statistic in the sense that a large fraction of values can be lower than the mean, and that many values can be much higher than the mean (see purple distribution at the visualization). ​</p>
+<p>For this reason, people often refer to power-law networks as “<strong>scale-free</strong>”, in the sense that the node degree of such networks does not have a “<strong>typical scale</strong>”. In the rest of this course, we prefer to use the term “<strong>power-law networks</strong>” because it is more precise. ​</p>
+</section>
+<section id="the-maximum-degree-in-a-power-law-network" class="level3">
+<h3 class="anchored" data-anchor-id="the-maximum-degree-in-a-power-law-network">The Maximum Degree in a Power-law Network​</h3>
+<p>Let us now derive an expression for the maximum degree we can expect to see in a power-law network with <span class="math inline">\(n\)</span> nodes, and to compare that with the corresponding maximum degree we can expect to get from a network in which the degree distribution decays exponentially fast with the degree <span class="math inline">\(k\)</span>. Recall that the Poisson distribution of <span class="math inline">\(G(n,p)\)</span> networks decays even faster than exponential distribution.</p>
+<p>To make the calculations easier, let us work with the (continuous) exponential distribution <span class="math inline">\(p_k = ce^{-\lambda k}\)</span>, where <span class="math inline">\(k\)</span> is the degree, <span class="math inline">\(\frac{1}{\lambda}\)</span> is the average degree, and <span class="math inline">\(c\)</span> is a normalization constant. ​​In a network in which the minimum degree is <span class="math inline">\(k_{\text{min}} \geq 0\)</span> (with 1 <span class="math inline">\(\frac{1}{\lambda} &gt; k_{\text{min}}\)</span>), the parameter <span class="math inline">\(c\)</span> should be equal to <span class="math inline">\(\lambda e^{\lambda k_{\text{min}}}\)</span>, and so the probability that a node has degree <span class="math inline">\(k\)</span> is ​</p>
+<p><span class="math display">\[
+p_k = \lambda  e^{\lambda k_{min}}  e^{- \lambda k}
+\]</span></p>
+<p>​Suppose that the node with maximum degree <span class="math inline">\(k_{\text{min}}\)</span> is unique – so the probability of having a degree <span class="math inline">\(k_{\text{max}}\)</span> is <span class="math inline">\(\frac{1}{n}\)</span>. ​</p>
+<p>​Thus, relying on the continuous <span class="math inline">\(k\)</span> approximation again, we can write that:​</p>
+<p><span class="math display">\[
+\int_{k_{max}}^{\infty} p_k {dk} = \frac{1}{n}​
+\]</span></p>
+<p>​Substituting the previous expression for <span class="math inline">\(p_k\)</span> and calculating this integral, we can easily get that the maximum degree for the exponential degree distribution is:​</p>
+<p><span class="math display">\[
+k_{max} = k_{min} + \frac{\ln n}{\lambda}​
+\]</span></p>
+<p>​This means that the <strong>maximum degree increases very slowly (logarithmically) with the network size <span class="math inline">\(n\)</span>, when the degree distribution decays exponentially fast with <span class="math inline">\(k\)</span>.</strong></p>
+<p>​Let us now repeat these derivations but for a power-law network with the same minimum degree <span class="math inline">\(k_{min}\)</span> and an exponent <span class="math inline">\(\alpha\)</span>.​</p>
+<p><span class="math display">\[
+p_k = \frac{\alpha-1}{k_{min}} \, (\frac{k}{k_{min}})^{-\alpha}​
+\]</span></p>
+<p>​Suppose that the node with maximum degree <span class="math inline">\(k_{max}\)</span> is unique – so the probability of having a degree <span class="math inline">\(k_{max}\)</span> is <span class="math inline">\(\frac{1}{n}\)</span></p>
+<p>​Thus, relying on the continuous <span class="math inline">\(k\)</span> approximation, we can again write that:​</p>
+<p><span class="math display">\[
+\int_{k_{max}}^{\infty} p_k {dk} = \frac{1}{n}​
+\]</span></p>
+<p>​Substituting the previous expression for <span class="math inline">\(p_k\)</span> and calculating this integral, we can easily get that the maximum degree for a power-law network is:​</p>
+<p><span class="math display">\[
+k_{max} = k_{min} \, n^{1/(\alpha-1)}​​
+\]</span></p>
+<p>​This means that the <strong>maximum degree in a power-law network increases as a power-law of the network size <span class="math inline">\(n\)</span>. If <span class="math inline">\(\alpha=3\)</span> the maximum degree increases with the square-root of <span class="math inline">\(n\)</span>.​</strong></p>
+<p><strong>In the more extreme case that <span class="math inline">\(\alpha=2\)</span> the maximum degree increases linearly with <span class="math inline">\(n\)</span>!</strong></p>
+<p>​To put these numbers in perspective, consider a network with one million nodes, and an average degree of <span class="math inline">\(\bar{k}=3\)</span>. If the network follows the exponential degree distribution, the maximum expected degree is only about 10 – not much larger than the average degree. ​</p>
+<p>If the network follows the power-law degree distribution with exponent <span class="math inline">\(\alpha=2.5\)</span> (recall that this is a typical value for many real-world networks), we get that the maximum degree is about 10,000!​</p>
+<p><img src="assets/L4_power_max.jpeg" class="img-fluid"> <em>Random vs.&nbsp;Scale-free Networks, Figure 4.6 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>​The example above clearly illustrates a major difference between exponential and power-law networks: the latter have nodes with a much greater number of connections than the average node – we typically refer to those nodes as <strong>Hubs</strong>. ​</p>
+<p>The visualization at this page illustrates the difference between exponential and power-law networks focusing on the presence of hubs. The network of major interstate highways in the US follows a Poisson distribution, without any nodes (cities) that have a much larger degree than the average. On the other hand, the network of direct flights between the major US cities follows a power-law degree distribution and there are obvious hubs, such as the airports in Atlanta, Chicago or New York city.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Derive the integrals shown in this page yourself. ​</p>
+</blockquote>
+</section>
+<section id="random-failures-and-targeted-attacks-in-power-law-networks" class="level3">
+<h3 class="anchored" data-anchor-id="random-failures-and-targeted-attacks-in-power-law-networks">Random Failures and Targeted Attacks in Power-law Networks</h3>
+<p>Another interesting characteristic of power-law networks is that they behave very differently than random ER-graphs (<strong>or, more generally, networks with Poisson degree distribution</strong>) in the presence of node failures. ​</p>
+<p>Let us first distinguish between <strong>random failures</strong> (<em>where a fraction f of randomly selected nodes are removed from the network</em>), and <strong>targeted attacks</strong> (<em>where a fraction f of the nodes with the highest degree are removed from the network</em>). In a communication network, for instance, random failures can be caused by router malfunctions, while targeted attacks may be caused by a terrorist that knows the topology of the network and disrupts the highest-connectivity routers first. ​</p>
+<p><img src="assets/L4_attack1.jpeg" class="img-fluid"> <em>Scale-free Network Under Attack, Figure 8.11 from networksciencebook.com by Albert-László Barabási</em></p>
+<p><img src="assets/L4_attack2.jpeg" class="img-fluid"> <em>Attacks and Failures in Random Networks. Figure 8.13 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>The plots in this page compare the effect of both random failures and attacks on both power-law networks (left) and ER-graphs (right). In both cases, the networks have the same size (10,000 nodes and 15,000 edges). The exponent of the power-law distribution in the network at the left is 2.5 (meaning that the variance of the degree distribution is infinite) and the average degree is 3. ​</p>
+<p>The y-axis of both plots shows the fraction of nodes that belong to the largest connected component, for a given fraction f of removed nodes (more precisely, the y-axis shows the ratio <span class="math inline">\(P_{\infty}(f)/P_{\infty}(0)\)</span>, where the numerator is the probability that a node belongs in the largest connected component given a fraction f of removed nodes, while the denominator is the same probability but when <span class="math inline">\(f=0\)</span>).</p>
+<p>In terms of random failures, the power-law degree network is much more robust than the random network: the largest connected component includes almost all nodes, even as f approaches 100% of the nodes. On the other hand, the random network’s largest connected component disintegrates after f exceeds a critical threshold (<em>around 0.7 in this example</em>). This difference is mostly due to the presence of hubs in power-law networks: hubs have so many connections that they manage to keep the non-deleted nodes in the same connected component, even when f is close to 1. ​</p>
+<p>The situation is very different from targeted attacks: power-law networks are very sensitive to those because an attacker would first delete the hub nodes, causing a disintegration of the largest connected component after f exceeds a critical threshold (<em>around 0.15 in this example</em>). That critical threshold is higher for Poisson networks because they do not have hub nodes. ​</p>
+<p>In summary, power-law networks are more robust to random failures than Poisson networks – but they are also more sensitive to targeted attacks than Poisson networks. ​</p>
+</section>
+<section id="degree-preserving-randomization" class="level3">
+<h3 class="anchored" data-anchor-id="degree-preserving-randomization">Degree-preserving Randomization​</h3>
+<p><img src="assets/L4_preserve.jpeg" class="img-fluid"> <em>Degree Preserving Randomization, Figure 4.17 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>Suppose that you analyze a certain network G and you find it has an interesting property P. For example, P may be one of the robustness properties we discussed in the previous page about the size of the largest connected component under random or targeted node removals. How can you check statistically whether P is caused by the degree distribution of the network G (as opposed to other network characteristics)?​</p>
+<p>One approach to do is to <strong>”randomize”</strong> the network G but without modifying the degree of any node. If we have a way to do so, we can create a large number of “<strong>degree-preserving</strong>” random networks – and then examine whether these networks also exhibit the property P. To make the analysis convincing we can also create another ensemble of randomized networks that do NOT have the same degree distribution with G but that maintain the same number of nodes and edges. Let us call these networks ”<strong>fully randomized</strong>”. ​</p>
+<p>If the property P of G is present in the degree-preserving randomized networks – but P is not present in the fully randomized networks, we can be confident that the property P is a consequence of the degree distribution of G and not of any other property of G.​</p>
+<p>To perform ”<strong>full randomization</strong>”, we can simply pick each edge (S1, T1) of G and change it to (S1, T2), where T2 is a randomly selected node. Note that this does not change the number of nodes or edges (and so the network density remains the same). The degree distribution however can change significantly. ​</p>
+<p>To perform “<strong>degree-preserving randomization</strong>”, we can pick two random edges(S1, T1) and (S2, T2) and rewire them to (S1,T2) and (S2, T1). Note that this approach preserves the degree of every node. This approach is repeated until we have rewired each edge at least once. ​</p>
+<p>The visualization at the lower part of the panel shows an example of a power-law network and two randomized networks. The degree-preserving network maintains the presence of hubs as well as the connected nature of the original network. The fully randomized network on the other hand does not have hubs (<em>and it could even include disconnected nodes – even though that does not happen in this example</em>). ​</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>There are more randomization approaches that can preserve more network properties than the degree distribution. How would you randomize a directed network so that the in-degree and the out-degree distributions remain the same?</p>
+</blockquote>
+</section>
+<section id="the-average-degree-of-the-nearest-neighbor-at-a-power-law-network" class="level3">
+<h3 class="anchored" data-anchor-id="the-average-degree-of-the-nearest-neighbor-at-a-power-law-network">The Average Degree of the Nearest Neighbor at a Power-law Network​</h3>
+<p><img src="assets/L4_avg_deg.jpeg" class="img-fluid"> <em>Structural Disassortativity, Figure 7.7 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>Recall the notion of “<strong>average neighbor degree</strong>” from Lesson-3 – which is the same with the expected degree of a node that is connected to a randomly sampled edge stub. ​</p>
+<p>Under the assumption of a “<strong>neutral network</strong>” (i.e., no correlation between the degrees of two connected nodes), we derived that the average neighbor degree is: ​</p>
+<p><span class="math display">\[
+\bar{k}_{n} = \bar{k} + \frac{\sigma^2_k}{\bar{k}}​
+\]</span></p>
+<p>This shows one more interesting property of power-law networks: as we previously discussed, these networks can have very large degree variability in practice (i.e., <span class="math inline">\(\sigma_k\)</span> is much higher than <span class="math inline">\(\bar{k}\)</span>). Consequently, the average neighbor degree can be much higher than the network’s average degree – intensifying the impact of the friendship paradox. ​</p>
+<p>The visualization at this page shows a power-law network with 300 nodes, 450 edges, and exponent 2.2, generated by the configuration model. We highlight the two highest-degree hubs. Note that many nodes are connected to those hubs, increasing the average neighbor degree of those nodes. ​</p>
+</section>
+<section id="configuration-model" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-model">Configuration Model​</h3>
+<p>Suppose that a real-world communication network with one thousand nodes has a power-law degree distribution with exponent <span class="math inline">\(\alpha=2.5\)</span> –you may want to investigate how this network will perform when it grows to ten thousand nodes, assuming that its degree distribution exponent remains the same.</p>
+<p>How can we create a synthetic network that has a given degree distribution? This is a central question in network modeling. ​</p>
+<p>​A general way to create synthetic networks with a specified degree distribution <span class="math inline">\(p_k\)</span> is the “configuration model”. The inputs to this model is 1. the desired number of nodes n, and 2. the degree <span class="math inline">\(k_i\)</span> of each node i. The collection of all degrees specifies the degree distribution of the synthetic network. ​</p>
+<p><img src="assets/L4_config.jpeg" class="img-fluid"> <em>The Configuration Model, Figure 4.15 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>​The configuration model starts by creating the n nodes: node <span class="math inline">\(i\)</span> has <span class="math inline">\(k_i\)</span> available “edge stubs”. Then, we keep selecting randomly two available stubs and connect them together with an edge, until there are no available stubs. The process is guaranteed to cover all stubs as long as the sum of all node degrees is even.​</p>
+<p>​The configuration model process is random and so it creates different networks each time, allowing us to produce an ensemble of networks with the given degree distribution. ​</p>
+<p>Additionally, note that the constructed edges may form self-loops (<em>connecting a node to itself</em>) or multi-edges (connecting the same pair of nodes multiple times). In some applications multi-edges and self-loops are not allowed – but the good news is that they are unlikely to happen when n is very large and the network is sparse. Removing them artificially is another option but it can cause deviations from the desired degree distribution. ​</p>
+<p>​The visualization of this page shows three different networks with n=4 that can result from the configuration model, given the same degree distribution. Note that there are more than three different networks that could include self loops and multi-edges - can you find the rest?</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>What is the probability that the configuration model will connect two nodes of degree <span class="math inline">\(k_i\)</span> and <span class="math inline">\(k_j\)</span>?</p>
+</blockquote>
+</section>
+<section id="preferential-attachment-model" class="level3">
+<h3 class="anchored" data-anchor-id="preferential-attachment-model">Preferential Attachment Model​</h3>
+<p>The configuration model can generate networks with arbitrary degree distributions – including power-laws with any exponent. However, the configuration model does not suggest any <strong>“generating mechanism</strong>” that explains how a network can gradually acquire a power-law degree distribution. ​</p>
+<p><img src="assets/L4_gen.jpeg" class="img-fluid"> <em>Evolution of the Barabási-Albert Model, Figure 5.3 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>One such generating model is known as “<strong>preferential attachment</strong>” (<em>or PA model or “Barabási-Albert” model</em>). In this model, the network grows by one node at each time step – so the network has t nodes after t time steps. Every time a new node is added to the network, it connects to m existing nodes (<em>m is the same for all new nodes – suppose that we allow self-loops and multi-edges for now</em>). The neighbors of the new node are chosen randomly but with a non-uniform probability, as follows.​</p>
+<p>Suppose that the new node arrives at a point in time <span class="math inline">\(t\)</span>, and let <span class="math inline">\(k_i(t)\)</span> be the degree of node <span class="math inline">\(i\)</span> at that time. The probability that the new node will connect to node <span class="math inline">\(i\)</span> is:​</p>
+<p><span class="math display">\[
+\Pi_i(t) = \frac{k_i(t)}{\sum_{j=1}^t k_j(t)} = \frac{k_i(t)}{2 m t}
+\]</span></p>
+<p>In other words, in the preferential attachment model, the network grows over time and new nodes are more likely to connect to nodes with higher degrees (see above plot). This is a ”<strong>rich get richer</strong>” effect because nodes with higher degree attract more connections from new nodes, making their degree even higher relative to other nodes. ​</p>
+<p>Later in the course, we will return to this model and study its behavior mathematically.</p>
+<p>For now, we only mention without proof that this model produces power-law networks with an exponent <span class="math inline">\(\alpha=3\)</span>. The value of the parameter m (number of edges of new node) does not affect the exponent of the distribution.</p>
+<p>The degree distribution at the plot below refers to a network that was created with the preferential attachment model, after generating n=100,000 nodes and with m=3 (the green dots show a log-binned estimate of the distribution while the purple dots show a linearly-binned histogram).​</p>
+<p><img src="assets/L4_gen2.jpeg" class="img-fluid"> <em>The Degree Distribution, Figure 5.4 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>The main value of the preferential attachment model is that it suggests that power-law networks can be generated through the combined effect of two mechanisms: growth and preferential connecting to nodes with a higher degree. Either of these two mechanisms on its own would not be sufficient to produce power-law networks. ​</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>How would you modify the preferential attachment model so that you get an exponent <span class="math inline">\(\alpha\)</span> between 2 and 3?​</p>
+</blockquote>
+</section>
+<section id="link-selection-model" class="level3">
+<h3 class="anchored" data-anchor-id="link-selection-model">Link Selection Model​</h3>
+<p><img src="assets/L4_selection.jpeg" class="img-fluid"> <em>Link Selection Model, Figure 5.13 from networksciencebook.com by Albert-László Barabási</em></p>
+<p>Another very simple generating model that also creates power-law networks with exponent 3 is the “<strong>link selection</strong>” model.​</p>
+<p>Suppose that each time we introduce a new node, we select a random link and the new node connects to one of the two end-points of that link (<em>randomly chosen</em>). In other words, the new node connects to a randomly selected edge-stub (<em>see visualization</em>).​</p>
+<p>In this model, the probability that the new node connects to a node of degree k is proportional to k (<em>because the node of degree-k has k stubs</em>). But this is exactly the same condition with the preferential attachment model: a linear relation between the degree k of an existing node and the probability that the new node connects to that existing node of degree-k. ​</p>
+<p>So, the link selection model is just a variant of preferential attachment and it also produces power-law degree distribution with exponent <span class="math inline">\(\alpha=3\)</span>.</p>
+</section>
+<section id="what-does-the-power-law-property-mean-in-practice" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-power-law-property-mean-in-practice">What Does The Power-law Property Mean in Practice?</h3>
+<p><img src="assets/L4_practice.webp" class="img-fluid"> <em>Image source: https://www.nature.com/articls/35082140/figures/2Links</em></p>
+<p>The focus of this lecture so far has been on the statistical properties of networks with power-law degree distribution. What does this property mean in practice, however? And how does it affect network phenomena that all of us care about, such as the spread of epidemics? ​</p>
+<p>​To answer the first question, let us consider the case of networks of sexual partners. There are several diseases that spread through sexual intercourse, including HIV-AIDS, syphilis or gonorrhea.The degree distribution in such networks relates to the number of sexual partners of each individual (node in the graph). The plots on this page are based on a 1996 survey of sexual behavior conducted in Sweden. The number of respondents was 2,810 and the age range was from 18 to 74 years old (<em>roughly balanced between men and women</em>). ​</p>
+<p>The plot at the left is the C–CDF for the number of partners of each individual during the last 12 months, shown separately for men and women. Note that the distributions drop roughly linearly in the log-log scale plot, suggesting the presence of a power-law distribution (<em>at least in the range from 2 to 20</em>). ​</p>
+<p>​The plot at the right is the corresponding C-CDF but this time for the entire lifetime of each individual. As expected, the range of the distribution now extends to a wider range (up to 100 partners for women and 1000 for men). Note the low-degree saturation effect we discussed earlier in this lesson, especially for less than 10 partners. The exponent of the C-CDF distributions is αtot = 2.1 ± 0.3 for women (in the range <span class="math inline">\(k_{tot} &gt; 20\)</span>), and <span class="math inline">\(\alpha_{tot} = 1.6 \pm 0.3\)</span> for men (in the range <span class="math inline">\(20 &lt; k_{tot} &lt; 400\)</span>). Estimates for females and males agree within statistical uncertainty. Note that these exponents refer to the C-CDF – so the corresponding exponents for the degree distributions would be, on average, 3.1 for women and 2.6 for men. ​</p>
+<p>​These exponent values suggest that, at least for men, the corresponding network of sexual contacts would have a power-law distribution with very high variability (theoretically, “<strong>infinite variance</strong>”). The distribution also shows the presence of hubs: individuals with hundreds of partners during their lifetime. The wide variability in this distribution justifies targeted intervention approaches that aim to identify the “<strong>hub individuals</strong>” and provide them with additional information, resources (such as condoms or treatment), and when available, vaccination. ​</p>
+</section>
+<section id="case-studies-superspreaders" class="level3">
+<h3 class="anchored" data-anchor-id="case-studies-superspreaders">Case Studies: Superspreaders</h3>
+<section id="superspreaders-in-sars-epidemic" class="level4">
+<h4 class="anchored" data-anchor-id="superspreaders-in-sars-epidemic">Superspreaders in SARS epidemic</h4>
+<p>The SARS (Severa Acute Respiratory Syndrome) was an epidemic back in 2002-3. It infected 8000 people in 23 countries and it caused about 800 deaths.</p>
+<p><img src="assets/L4_sars.png" class="img-fluid"> <em>Source: Super-spreaders in infectious diseases <a href="https://www.sciencedirect.com/science/article/pii/S1201971211000245">Richard A.Stein</a>, International Journal of Infectious Diseases, August 2011 https://doi.org/10.1016/j.ijid.2010.06.020</em></p>
+<p>The plot shown here shows how the infections progressed from a single individual (labeled as patient-1) to many others. Such plots result from a process known as “contact tracing” – finding out the chain of successive infections in a population.</p>
+<p>It is important to note the presence of a few hub nodes, referred to as <strong>“superspreaders”</strong> in the context of epidemics. The superspreaders are labeled with an integer identifier in this plot. The superspreader 1, for example, infected directly about 20 individuals.</p>
+<p>The presence of superspreaders emphasizes the role of degree heterogeneity in network phenomena such as epidemics. If the infection network was more “<strong>Poisson-like</strong>”, it would not have superspreaders and the total number of infected individuals would be considerably smaller.</p>
+<hr>
+</section>
+<section id="superspreaders-versus-the-average-reproductive-number-r_0" class="level4">
+<h4 class="anchored" data-anchor-id="superspreaders-versus-the-average-reproductive-number-r_0">Superspreaders Versus The Average Reproductive Number <span class="math inline">\(R_0\)</span></h4>
+<p><img src="assets/L4_sars2.png" class="img-fluid"> <em>Source: Cellular Superspreaders: An Epidemiological Perspective on HIV Infection inside the Body Kristina Talbert-Slagle et al., 2014, https://doi.org/10.1371/journal.ppat.1004092</em></p>
+<p>Epidemiologists often use the basic “reproductive number”, <span class="math inline">\(R_0\)</span>, which describes the average number of secondary infections that arise from one infected individual in an otherwise totally susceptible population.</p>
+<p>One way to estimate <span class="math inline">\(R_0\)</span> is to multiply the average number of contacts of an infected individual by the probability that a susceptive individual will become infected by a single infected individual (“shedding potential”). So, the <span class="math inline">\(R_0\)</span> metric does not depend only on the given pathogen – it also depends on the number of contacts that each individual has. If <span class="math inline">\(R_0\)</span>&gt;1 then an outbreak is likely to become an epidemic, while if <span class="math inline">\(R_0\)</span>&lt;1 then an outbreak will not spread beyond a few initially infected individuals</p>
+<p>It is important to realize however that <span class="math inline">\(R_0\)</span> is only an average – it does not capture the heterogeneity in the number of contacts of different individuals (<em>and it also does not capture the heterogeneity in the shedding potential of the pathogen at different individuals</em>). As we know by now, contact networks can be extremely heterogeneous in terms of the degree distribution, and they can be modeled with a power-law distribution of (theoretically) infinite variance. Such networks include hubs – and as we saw above, hubs can act as superspreaders during epidemic outbreaks.</p>
+<p>The table in this page confirms this point for several epidemics. The third column shows R0 while the fourth column shows ”<strong>Superspreading events</strong>” (SSE). These are events during an outbreak in which a single infected individual causes a large number of direct or indirect infections. For example, in the case of the 2003 SARS epidemic in Hong Kong, even though <span class="math inline">\(R_0\)</span> was only 3, there was an SSE in which an infected individual caused a total of 187 infections (<em>patient-1 above</em>).</p>
+<p>SSEs have been observed in practically every epidemic – and they have major consequences both in terms of the speed through which an epidemic spreads and in terms of appropriate interventions. For example, in the case of respiratory infections (such as COVID-19) “<strong>social distancing</strong>” is an effective intervention only as long as it is adopted widely enough to also include superspreaders.</p>
+</section>
+</section>
+<section id="lesson-summary" class="level3">
+<h3 class="anchored" data-anchor-id="lesson-summary">Lesson Summary</h3>
+<p>The goal of this module was to introduce you to real networks, their degree distributions and the differences they have with random networks. From there we explored the Power-law degree distribution, how to test for it, methods of plotting it, and the special properties of networks that have this distribution. These properties include the maximum degree, the robustness of these networks reason that power-law network are sometimes also referred to as scale-free networks. Additionally, we introduced you to several models for generating real networks such as the configuration model, the link-selection model and the preferential attachment model.</p>
+<p>Because real networks with power-law degree distributions are the ones that occur in nature, we will continue to build upon these concepts further in the remainder of the modules as we explore concepts such as sociological networks, communities within networks, and the dynamics of contagion spreading withing a network.</p>
+</section>
+<section id="assortative-neutral-and-disassortative-networks" class="level3">
+<h3 class="anchored" data-anchor-id="assortative-neutral-and-disassortative-networks">Assortative, Neutral and Disassortative Networks</h3>
+<p><img src="assets/L3_ANDN.png" class="img-fluid"></p>
+<p>Let’s look at some examples of science degree correlation plots from real world networks. The first network refers to the collaboration between a group of scientists, two nodes are connected if they have written at least one research paper together. Notice that the data is quite noisy especially when the degree K is more than 70.</p>
+<p>The reason is simply that we did not have a large enough sample of such nodes with large degrees. Nevertheless, we clearly see a positive correlation between the degree K and the degree of the nearest neighbor which is shown in the y axis.</p>
+<p>If we model the data with a power law relation, the exponent <span class="math inline">\(\mu\)</span> is approximately 0.37 in this case. We can use this value to quantify and compare the sort of activity of different networks when the estimate is <span class="math inline">\(\mu\)</span> is statistically significant.</p>
+<p>The second network refers to a portion of the power grid in the United States. the data in this case does not support a strong correlation between the degree K and the degree of the nearest neighbor. So it is safe to assume that this network is what we call neutral</p>
+<p>The third network refers to a metabolic network where nodes here are metabolites and they are connected if two metabolites A and B appear in the opposite side of the same chemical reaction in a biological cell. The data shows a strong negative correlation in this case but only if the nodes have degree 5, 10, or higher. If we model the data with power law relation, the exponent <span class="math inline">\(\mu\)</span> is approximately minus 0.86. This suggests that complex metabolites such as glucose are either synthesized through a process called anabolism or broken down into through a process called catabolism into a large number of simpler molecules such as carbon dioxide.</p>
+</section>
+<section id="lesson-summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="lesson-summary-1">Lesson Summary</h3>
+<p>The main objective of this lesson was to explore the notion of “degree distribution” for a given network. The degree distribution is probably the first thing you will want to see for any network you encounter from now on. It gives you a quantitative and concise description of the network’s connectivity in terms of average node degree, degree variability, common degree modes, presence of nodes with very high degrees, etc.</p>
+<p>In this context, we also examined a number of related topics. First, the friendship paradox is an interesting example to illustrate the importance of degree variability. We also saw how the friendship paradox is applied in practice in vaccination strategies.</p>
+<p>We also introduced G(n,p), which is a fundamental model of random graphs – and something that we will use extensively as a baseline network from now on. We explained why the degree distribution of G(n,p) networks can be approximated with the Poisson distribution, and analyzed mathematically the size of the largest connected component in such networks.</p>
+<p>Obviously, the degree distribution does not tell the whole story about a network. For instance, we talked about networks with degree correlations. This is an important property that we cannot infer just by looking at the degree distribution. Instead, it requires us to think about the probability that two nodes are connected as a function of their degrees.</p>
+<p>We will return to all of these concepts and refine them later in the course.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dnouri3\.github\.io\/gt-network-science-notes\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecture-3.html" class="pagination-link" aria-label="Lecture 3">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lecture 3</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecture-5.html" class="pagination-link" aria-label="Lecture 5">
+        <span class="nav-page-text">Lecture 5</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

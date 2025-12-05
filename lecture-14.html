@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>gt-nsci-l14 – GT Network Science Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecture-13.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f503c0b15d9f8f334cec1fc4b8652841.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-54f67416df7f62e5f91c855543863998.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  </head><body class="nav-sidebar floating quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>true
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="default_style.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture-14.html">Lecture 14</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Science - CS 7280 OMSCS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quick-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quick Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 11</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 13</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-14.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture 14</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contents" id="toc-contents" class="nav-link active" data-scroll-target="#contents">Contents</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#embedding-nodes-in-a-low-dimensional-space" id="toc-embedding-nodes-in-a-low-dimensional-space" class="nav-link" data-scroll-target="#embedding-nodes-in-a-low-dimensional-space">Embedding Nodes in a Low-dimensional Space​</a></li>
+  <li><a href="#shallow-encodings-and-similarity-metrics" id="toc-shallow-encodings-and-similarity-metrics" class="nav-link" data-scroll-target="#shallow-encodings-and-similarity-metrics">Shallow Encodings and Similarity Metrics​</a></li>
+  <li><a href="#random-walk-encodings-and-node2vec" id="toc-random-walk-encodings-and-node2vec" class="nav-link" data-scroll-target="#random-walk-encodings-and-node2vec">Random-walk Encodings and Node2vec</a></li>
+  <li><a href="#applications-of-node-embeddings" id="toc-applications-of-node-embeddings" class="nav-link" data-scroll-target="#applications-of-node-embeddings">Applications of Node Embeddings</a></li>
+  <li><a href="#deep-embeddings-and-graph-neural-networks" id="toc-deep-embeddings-and-graph-neural-networks" class="nav-link" data-scroll-target="#deep-embeddings-and-graph-neural-networks">Deep Embeddings and Graph Neural Networks</a></li>
+  <li><a href="#gnn-training-and-decoders" id="toc-gnn-training-and-decoders" class="nav-link" data-scroll-target="#gnn-training-and-decoders">GNN Training and Decoders</a></li>
+  <li><a href="#application-polypharmacy" id="toc-application-polypharmacy" class="nav-link" data-scroll-target="#application-polypharmacy">Application: Polypharmacy​</a></li>
+  <li><a href="#advanced-topics-deep-generative-models-for-graphs" id="toc-advanced-topics-deep-generative-models-for-graphs" class="nav-link" data-scroll-target="#advanced-topics-deep-generative-models-for-graphs">Advanced Topics: Deep Generative Models for Graphs</a></li>
+  <li><a href="#advanced-topics-interdependent-networks" id="toc-advanced-topics-interdependent-networks" class="nav-link" data-scroll-target="#advanced-topics-interdependent-networks">Advanced Topics: Interdependent Networks</a></li>
+  <li><a href="#lesson-summary" id="toc-lesson-summary" class="nav-link" data-scroll-target="#lesson-summary">Lesson Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<hr>
+<div class="lecture-nav">
+<p><a href="./lecture-13.html" class="nav-prev">← Lecture 13</a></p>
+</div>
+<p><strong>In this lecture:</strong> <strong>Graph representation learning</strong> with <em>shallow similarity</em> embeddings, <strong>random-walk</strong> methods like <strong>node2vec</strong>, and <strong>graph neural networks</strong>, plus applications from <em>polypharmacy</em> to <strong>generative</strong> and <strong>temporal</strong> models.</p>
+<section id="contents" class="level2">
+<h2 class="anchored" data-anchor-id="contents">Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#embedding-nodes-in-a-low-dimensional-space">Embedding Nodes</a></li>
+<li><a href="#shallow-encodings-and-similarity-metrics">Shallow Encodings</a></li>
+<li><a href="#random-walk-encodings-and-node2vec">Random-Walk Encodings</a></li>
+<li><a href="#applications-of-node-embeddings">Applications of Embeddings</a></li>
+<li><a href="#deep-embeddings-and-graph-neural-networks">Graph Neural Networks</a></li>
+<li><a href="#gnn-training-and-decoders">GNN Training &amp; Decoders</a></li>
+<li><a href="#application-polypharmacy">Polypharmacy Case Study</a></li>
+<li><a href="#advanced-topics-deep-generative-models-for-graphs">Advanced Topics: Generative Models</a></li>
+<li><a href="#advanced-topics-interdependent-networks">Advanced Topics: Interdependent Nets</a></li>
+<li><a href="#advanced-topics-temporal-networks">Advanced Topics: Temporal Nets</a></li>
+<li><a href="#lesson-summary">Lesson Summary</a></li>
+</ul>
+<hr>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Readings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Required Reading</strong></p>
+<ul>
+<li><a href="https://arxiv.org/abs/1709.05584">“Representation learning on graphs: Methods and applications”</a>, by W.L.Hamilton et al.&nbsp;2017</li>
+</ul>
+<p><strong>Recommended Reading</strong></p>
+<ul>
+<li><a href="https://ieeexplore.ieee.org/abstract/document/9039675">“Deep learning on graphs: A survey”</a>, by Z.Zhang et al.&nbsp;2020</li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/S0370157312000841">“Temporal networks”</a>, by P.Holme and Z.Saramaki, 2012</li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/S0370157314002105">“The structure and dynamic of multilayer networks”</a>, by S.Boccaletti et al., 2014</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="embedding-nodes-in-a-low-dimensional-space" class="level3">
+<h3 class="anchored" data-anchor-id="embedding-nodes-in-a-low-dimensional-space">Embedding Nodes in a Low-dimensional Space​</h3>
+<p>Machine Learning (ML) is a mature discipline with powerful methods to solve classification, clustering, regression and many other problems in data science. Most ML methods however require a vector representation of the inputs. This is easy to do with structured data that already come in the form of vectors or matrices. Even in the case of images, we can easily create a vector of pixel intensities (or RGB colors), scanning the image row by row.</p>
+<p>How can we represent a graph (or network), however, with a vector? A graph can have an arbitrary structure, with some nodes being much more connected than others.</p>
+<p>One option would be to represent each node v with an N-dimensional binary vector, where N is the number of nodes: element i is one if node-i is a neighbor of node v and zero otherwise. That vector representation however would be of high dimensionality for large networks. The sampling efficiency of most ML algorithms (i.e., how much training data they need in order to learn a model) is determined by that dimensionality. So, we are interested in graph representation methods that will map each node to a d-dimensionality vector, with <span class="math inline">\(d \ll N\)</span>. The d-dimensional vector that corresponds to a node u is referred to as the “embedding” <span class="math inline">\(f(u)\)</span> of that node (see Figure below).</p>
+<p><img src="assets/L14_embedding.png" class="img-fluid"> <em>Images ( a,b ) from Jure Leskovec , “Representation Learning on Networks” tutorial, WWW 2018</em></p>
+<p>Consider, for instance, the well-known Zachary’s karate club network (we had also examined that network in Lesson-7), and suppose that we want to represent each node with a two-dimensional vector, i.e., with a point in the Euclidean plane. How would you choose those N points?</p>
+<p>One approach would be to map any two nodes that are “close to each other” in terms of network distance (e.g., directly connected with each other, or having a relatively large number of common neighbors) to two nearby points in the plane. And similarly, any two nodes that have a large network distance should be mapped to points with relatively large distance in the plane. The following figure shows a particular embedding of the nodes in Zachary’s network using the DeepWalk algorithm, which will be covered later in this Lesson.</p>
+<p><img src="assets/L14_embedding1.png" class="img-fluid"> <em>Image from: <a href="https://arxiv.org/pdf/1403.6652.pdf">Perozzi et al.&nbsp;2014</a>. ​DeepWalk: Online Learning of Social Representations. KDD.</em></p>
+<p>Why is it reasonable to create node embeddings based on the network distance between two nodes? The basic idea is that the network distance between two nodes in a graph is usually related to the similarity between those two nodes. For instance, in the context of social networks, two individuals that have strong ties between them and/or many common friends, would typically be similar in terms of interests. At the same time, many ML methods (such as classifiers based on the K-nearest neighbors algorithm or based on Support Vector Machines) are based on the assumption that the similarity between two inputs is reflected by the distance between their two embeddings.</p>
+<p><img src="assets/L14_embedding2.png" class="img-fluid"></p>
+<p>For example, if our goal is to classify “politically unlabeled” people in a social network (say whether they are Democrats, Republicans, Independent, etc), the idea of creating embeddings based on the network connectedness of two nodes makes a lot of sense: individuals that belong in the same social groups will be mapped to nearby embeddings.</p>
+<p>Another example would be in the context of community detection. If the node embeddings are based on network distance, we can use any ML clustering algorithm (such as K-means) to identify clusters of nearby points in the d-dimensional embedding space.</p>
+<p>As you can imagine, there are many way to compute embeddings from a graph so that well-connected nodes are mapped to nearby (or similar) vectors. In the next few pages we will examine more closely some popular methods to compute node embeddings.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>The Karate club embeddings are deliberately shown here in low-resolution so that the label of the nodes is not clear. Can you identify at least five of the nodes from their embeddings?</p>
+</blockquote>
+</section>
+<section id="shallow-encodings-and-similarity-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="shallow-encodings-and-similarity-metrics">Shallow Encodings and Similarity Metrics​</h3>
+<p>In this page we discuss some simple approaches to compute node embeddings. They are referred to as “shallow” because the computation of the embeddings does not require to train a deep neural network.</p>
+<p>If we have n nodes and the dimensionality of the embeddings is d, the node embeddings can be “encoded” in a <span class="math inline">\(d\times n\)</span> matrix <span class="math inline">\({\bf Z}\)</span> (see figure below). If v is an <span class="math inline">\(n \times 1\)</span> “one-hot” vector (all elements are zero except the element that represents node v, which is one), then the embedding of node v is given by the following matrix multiplication:</p>
+<p><span class="math display">\[
+{\bf\mbox{ENC}} (v)=\bf{Z}\,\bf{v}
+\]</span></p>
+<p>which simply extracts the i’th vector of matrix <span class="math inline">\({\bf Z}\)</span>.</p>
+<p><img src="assets/L14_Shallow.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018​</em></p>
+<p>Let us now see how to compute the matrix ${} based on different notions of “node similarity”.</p>
+<p>The simplest approach is to define that two nodes are similar only if the are directly connected. Further, if the network is weighted, the similarity of two nodes can be equal to the weight of their connecting edge. Specifically, if A is the (possibly weighted) <span class="math inline">\(n \times n\)</span> adjacency matrix of the network, we can compute the matrix Z so that the dot-product of the embeddings <span class="math inline">\(z_u\)</span> and <span class="math inline">\(z_v\)</span> of any two nodes u and v is equal to the element <span class="math inline">\(A_{u,v}\)</span> of the adjacency matrix. Recall that the dot-product of two vectors with unit magnitude is equal to the cosine of the angle between them – and so it quantifies the distance between the two vectors.</p>
+<p>One way to compute the matrix <span class="math inline">\({\bf Z}\)</span> then, is to minimize the following “loss function” through any numerical optimization method (such as Stochastic Gradient Descent):</p>
+<p><span class="math display">\[
+\mathcal{L}=\sum_{(u,v)\in V\times V} \|{\bf z}_u^T \, {\bf z}_v-{\bf A}_{u,v}\|
+\]</span></p>
+<p>If the previous loss cannot be minimized exactly to zero, the node embeddings would only approximate the previous relation with the adjacency matrix. An obvious drawback of this approach is that two nodes are considered “not similar” if they are not directly connected, even if they have many common network neighbors.</p>
+<p>A more general approach is to consider that a node v is “similar”, not only to its direct neighbors, but also to any node that is at most k-hops away from v (for a small value of k, say 2 or 3). For example, in the following figure, the red node would be considered “similar” to only the green nodes if k=1, also the blue nodes if k=2, and all shown nodes if k=3. Then, we can compute the embedding matrix <span class="math inline">\({\bf Z}\)</span> using the previous loss function, but replacing the adjacency matrix <span class="math inline">\({\bf A}\)</span> with a k-hop adjacency matrix <span class="math inline">\({\bf A_k}\)</span> in which two nodes are considered neighbors even if they are at most k-hops away from each other. Another approach is to use the first k powers of the adjacency matrix <span class="math inline">\({\bf A^k}\)</span>. Recall from Lesson-2 that this matrix gives the number of k-hop paths between any two nodes (for unweighted graphs).</p>
+<p><img src="assets/L14_Shallow1.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018</em></p>
+<p>Another approach is to consider the overlap between the network neighborhood of two nodes. For instance, in the following network the blue and red nodes are not directly connected but they have two common neighbors (out of 3 neighbors for the red node, and out of 4 neighbors for the blue node).</p>
+<p><img src="assets/L14_Shallow2.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018​</em></p>
+<p>Recall that we had defined such a node similarity metric in Lesson-7. Specifically, the similarity <span class="math inline">\(S_{i,j}\)</span> between any pair of nodes i and j can be defined as:</p>
+<p><span class="math display">\[
+S_{i,j} = \frac{N_{i,j}+A_{i,j}}{\min\{k_i,k_j\}}
+\]</span></p>
+<p>where <span class="math inline">\(N_{i,j}\)</span> is the number of common neighbors of i and j, <span class="math inline">\(A_{i,j}\)</span> is the adjacency matrix element for the two nodes (1 if they are connected, 0 otherwise), and <span class="math inline">\(k_i\)</span> is the degree of node i. Note that <span class="math inline">\(S_{i,j}=1\)</span> if the two nodes are connected with each other and every neighbor of the lower-degree node is also a neighbor of the other node. On the other hand, <span class="math inline">\(S_{i,j}=0\)</span> if the two nodes are not connected to each other and they do not have any common neighbor. There are several such node similarity metrics in the literature with minor differences between them.</p>
+<p>Given such a similarity metric, the node embeddings can be then computed numerically based on the following loss function:</p>
+<p><span class="math display">\[
+\mathcal{L}=\sum_{(u,v)\in V\times V} \|{\bf z}_u^T \, {\bf z}_v-{\bf S}_{u,v}\|
+\]</span></p>
+<p>All three approaches that we have seen in this page have some common characteristics. First, they are rather computationally expensive because the loss function considers every possible pair of nodes, even if the similarity between the two nodes is quite weak. This drawback can be addressed using appropriate regularization terms in the previous loss functions that ignore node pairs with very weak similarity.</p>
+<p>A second drawback is that these methods require a separate embedding vector for each node, increasing the number of parameters of the resulting machine learning model proportionally to the network size. Ideally, we would prefer a node embedding scheme in which the number of model parameters is either constant or it scales sub-linearly with the network size. We will see such schemes later in this lesson.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<ol type="1">
+<li>The previous loss functions rely on the dot-product of embedding vectors. How would you modify these loss functions so that they rely instead on the L2-distance of embedding vectors?</li>
+<li>Which of the previous methods would you prefer if the network is weighted and directed?</li>
+</ol>
+</blockquote>
+</section>
+<section id="random-walk-encodings-and-node2vec" class="level3">
+<h3 class="anchored" data-anchor-id="random-walk-encodings-and-node2vec">Random-walk Encodings and Node2vec</h3>
+<p>The previous methods to compute node embeddings are deterministic in nature. More recent embedding methods rely instead on stochastic notions of “neighborhood overlap” between pairs of nodes.</p>
+<p>In particular, <strong>DeepWalk</strong> (a misnomer – because it does not use deep learning) and <strong>node2vec</strong> are the most popular in this category. Both of them construct node embeddings based on random walks: two nodes u and v have similar embeddings (<span class="math inline">\(z_u \approx z_v\)</span>) if the two nodes tend to co-occur on short random walks over the graph.</p>
+<p><img src="assets/L14_rw.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018</em></p>
+<p>Specifically, assume that we have an undirected network, and suppose that <span class="math inline">\(P_{R}(v\|u)\)</span> is the probability of visiting node v on random walks of length-T starting at node u, where T is typically a small positive integer (say between 2 to 10, depending on the size of the network). If that probability is high, the two nodes are “close” and they should have similar embeddings. Otherwise, their embeddings should be quite different.</p>
+<p>Based on this insight, we can parameterize the probability <span class="math inline">\(P_{R}(v\|\bf{z_u})\)</span> using the following “softmax” ratio (which is always between 0 and 1) of the node embeddings:</p>
+<p><span class="math display">\[
+\frac{e^{ {\bf z}^T_u {\bf z}_v}}{\sum_{n\in V}e^{z^T_u {\bf z}_n}} \approx P_R(v|{\bf z}_u)
+\]</span></p>
+<p>We can now compute the node embeddings by minimizing the following cross-entropy loss function</p>
+<p><span class="math display">\[
+\mathcal{L} = \sum_{u \in V}\sum_{v \in {N_R}(u)} -\log{P(v|{\bf z}_u})
+\]</span></p>
+<p>where <span class="math inline">\({\bf N_R(u)}\)</span> is the multi-set of nodes in the ensemble of random walks of length T that start from u (it is a multi-set because we can have repeated elements – nodes can be visited multiple times on each random walk). So, a node v that appears multiple times in <span class="math inline">\({\bf N_R(u)}\)</span> will contribute more in the previous sum than a node v’ that appears only once in <span class="math inline">\({\bf N_R(u)}\)</span>.</p>
+<p>If you are not familiar with cross-entropy loss functions, the goal here is to adjust the model parameters (i.e., the node embeddings) so that the terms <span class="math inline">\(P_{R}(v|\bf{z_u})\)</span> are close to 1 when v is in NR(u) and close to 0 when v is not in <span class="math inline">\({\bf N_R(u)}\)</span>.</p>
+<p>Algorithmically, we can think about the previous process as follows:</p>
+<ol type="1">
+<li>We run short random walks of length T starting from each node u on the graph using a given random walk strategy R(T).</li>
+<li>For each node u, we compute <span class="math inline">\({\bf N_R(u)}\)</span>, defined as the multi-set of nodes visited on random walks starting from u.</li>
+<li>We optimize the embeddings <span class="math inline">\({\bf z_v}\)</span> for every node v based on the previous loss function, given that we know <span class="math inline">\({\bf N_R(u)}\)</span> for every node u. ​ Different methods in this literature use various approximations to minimize the previous loss functions, resulting in different computational complexity. For instance, node2vec also uses a set of “negative samples” to approximate the denominator of the softmax term so that the corresponding summation does not need to consider all pairs of nodes.</li>
+</ol>
+<p>Another difference between node2vec and earlier methods is that it introduces two parameters, p and q, that bias the random walk process. Specifically, p controls the probability that the walk will return to the previous node, while q controls the probability that the walk will visits a node’s neighbor that it has not visited before. The following example illustrates these random walk strategies.</p>
+<p>Suppose that a random walk started at u and is now at w. The neighbors of w can be: closer to u (s1), farther from u (s3), same distance to u (s2). We remember where that walk came from. Where to go next? The two parameters that control that decision are:</p>
+<ul>
+<li>p … return parameter (<strong>BFS-like</strong> walk: Low value of p)</li>
+<li>q … ”walk away” parameter (<strong>DFS-like</strong> walk: Low value of q)</li>
+</ul>
+<p><img src="assets/L14_rw1.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018.​</em></p>
+<p>Random walk approaches are more expressive than the deterministic embedding methods we discussed in the previous page because the notion of “similarity” between node pairs is stochastic and it can incorporate information about both local and more distant neighbors. They are also more efficient because the training process only needs to consider node pairs that co-occur on short random walks – instead of all possible node pairs.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Suppose that we do not use the previous softmax ratio to parameterize the probabilities <span class="math inline">\(P_{R}(v|\bf{z_u})\)</span>. Can you think of another way to parameterize these probabilities as a function of the node embedding vectors?</p>
+</blockquote>
+</section>
+<section id="applications-of-node-embeddings" class="level3">
+<h3 class="anchored" data-anchor-id="applications-of-node-embeddings">Applications of Node Embeddings</h3>
+<p><img src="assets/L14_embed.png" class="img-fluid"> <em>Images from Jure Leskovec, “Representation Learning on Networks” tutorial, WWW 2018​</em></p>
+<p>How can we use node embeddings to answer important questions about the original network?</p>
+<p>If you are familiar with machine learning, you know that some classical ML tasks are to perform classification, clustering, regression, anomaly detection, feature learning, etc. All of these tasks have their counterparts in network analysis.</p>
+<p>For instance, ML classifiers (based on algorithms such as neural nets, decision trees, SVMs, etc) can be directly applicable to <strong>classify the nodes of a network in different types</strong> (e.g., male versus female, humans versus bots, political affiliation). To perform this task we need a training dataset that consists of pairs (zv, cv), where zv is the embedding vector of node v and cv is the class (or type) of that node, at least for some nodes of the graph.</p>
+<p>Another ML application on networks is <strong>link prediction</strong>. As we have discussed before, network data are often noisy and we may have both false positives (spurious edges) and false negatives (missing edges). If have computed node embeddings based on a (potentially noisy) estimate of the adjacency matrix, we can then train a binary classifier to predict whether any two given nodes are connected or not. Again, we need a training dataset that consists of pairs of nodes for which we are confident that they are either connected – or not connected. That classifier can then be applied on other pairs of nodes for which we do not have high-quality data.</p>
+<p>A third application is <strong>community detection</strong>. Even though we have already discussed several algorithms to solve that problem, the use of node embeddings allows us to apply any clustering algorithm on those vectors. If we use an embedding scheme that considers the network distance between any two nodes, each resulting cluster will consist of a group of nodes that are within a short network distance from each other. The ML literature includes 100s of clustering algorithms, and so using this approach for community detection provides us with a very large “toolbox”.</p>
+<p>A fourth application is the <strong>visualization of networks</strong>, relying on the dimensionality reduction provided by node embeddings. Suppose for instance that the node embeddings are two-dimensional. Then, we can represent the nodes of the network in the Euclidean plane, which is much easier for humans to visualize and understand. Nodes with shorter network distance will have more similar embeddings.</p>
+<p>There are many other applications of node embeddings in the analysis of networks – and the list keeps growing. As we will see in the next page, however, the use of shallow embeddings has some fundamental limitations. For this reason, we will discuss next the use of deep neural networks to represent graphs.</p>
+</section>
+<section id="deep-embeddings-and-graph-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="deep-embeddings-and-graph-neural-networks">Deep Embeddings and Graph Neural Networks</h3>
+<p>Deep Learning (i.e., the use of neural networks with several layers of hidden units) gives us models that can learn quite complex nonlinear and hierarchical input-output functions.</p>
+<p>The node embedding methods we discussed so far are “shallow” in the sense that they are not computed using such deep neural networks. There are several problems with shallow embeddings:</p>
+<ul>
+<li>The model parameters include a <strong>different embedding vector for each node</strong>. For huge graphs, this can be an issue. Ideally, we would like to compute the embedding vector of any node using a single model, sharing the model parameters across all nodes.</li>
+<li>Models based on shallow embeddings <strong>do not have inductive capability</strong>, i.e., they cannot generalize beyond the training data that we use to learn the model. An embedding vector is computed for every node of the given graph – but it is not clear how to compute embedding vectors for nodes that may join the graph later (think of dynamic graphs) or for nodes that are not visible (we may only have a partial view of the compete graph). Ideally, we would like to learn a model that can generalize beyond the portion of the graph it has used in the training process.</li>
+<li>The shallow embedding methods we have discussed are based strictly on connectivity (i.e., the graph adjacency matrix) and so they <strong>cannot model arbitrary node attributes</strong>. For instance, in a social network the nodes may have additional attributes that relate to their gender, age, salary, etc.</li>
+</ul>
+<p>We will now present one way to apply deep learning in the problem of node embedding and graph representation: <strong>Graph Neural Networks (or GNNs)</strong>. We emphasize that there are many other similar methods, such as Graph Convolutional Networks or Graph Recurrent Neural Networks. If you are interested to learn more, please refer to the reading list at the start of the Lesson.</p>
+<p>Suppose that we are given a graph G with:</p>
+<ul>
+<li><span class="math inline">\({\bf V}\)</span>: the set of n nodes.</li>
+<li><span class="math inline">\({\bf A}\)</span>: the adjacency matrix.</li>
+<li><span class="math inline">\({\bf x_v}\)</span>: an m-dimensional vector for each node v, representing arbitrary node attributes (e.g., gender, age, salary)</li>
+</ul>
+<p>A GNN is a neural network in which we compute an embedding vector for each node at each layer of the network. Let us represent by <span class="math inline">\({\bf h_v^k}\)</span> the embedding of node <span class="math inline">\({\bf v}\)</span> at layer <span class="math inline">\({\bf k}\)</span>. At the input layer, we have that <span class="math inline">\({\bf h_v^0 = x_v}\)</span>, i.e., the given node attributes.</p>
+<p>At the <span class="math inline">\({\bf k'}\)</span>th hidden layer <span class="math inline">\({\bf k&gt;0}\)</span>, the embedding <span class="math inline">\({\bf h_v^k}\)</span> of node <span class="math inline">\({\bf k}\)</span> depends on both the embedding of the same node at the previous layer <span class="math inline">\({\bf h_v^{k-1}}\)</span> as well as on the embedding <span class="math inline">\({\bf h_u^{k-1}}\)</span> of every neighbor u of v at the previous layer. More specifically, if <span class="math inline">\({\bf N(v)}\)</span> represents the set of all neighbors of node v in the given graph, the embedding <span class="math inline">\({\bf h_v^k}\)</span> depends on the <strong>average</strong> of <span class="math inline">\({\bf h_u^{k-1}}\)</span> across all u in <span class="math inline">\({\bf N(v)}\)</span>. This average represents the contribution of the “local neighborhood” of node v to its embedding.</p>
+<p>For example, consider the graph at the left of the following figure. The neural network at the right shows that the embedding of node-A at the second hidden layer depends on the layer-1 embeddings of nodes B, C and D (the neighbors of A). Similarly, the embedding of node B at layer-1 depends on the layer-0 embeddings of nodes A and C (the neighbors of B), the embedding of node C at layer-1 depends on the layer-0 embedding of nodes A, B, E and F, and the embedding of node D at layer-1 depends on the layer-0 embedding of node A.</p>
+<p><img src="assets/L14_deep_embed.png" class="img-fluid"> <em>All images in this page are from Jure Leskovec , “Representation Learning on Networks” tutorial, WWW 2018</em></p>
+<p>The previous figure only showed the neural network for computing the embedding of node-A (the yellow node) at layer-2. The following figure shows the corresponding networks for all other nodes, using the same color code. Of course in practice all these networks would be integrated in the same neural network model.</p>
+<p><img src="assets/L14_deep_embed1.png" class="img-fluid"></p>
+<p>What is the specific mathematical form of these functional dependencies? As in most artificial neural networks, the output of a hidden-layer unit with inputs <span class="math inline">\({\bf x}\)</span> (a <span class="math inline">\({\bf d}\)</span>-dimensional vector) is given by a nonlinear activation function <span class="math inline">\(\sigma()\)</span> of the weighted sum of the inputs:</p>
+<p><span class="math display">\[
+\sigma\left(\sum^d_{i=0}w_i x_i\right)
+\]</span></p>
+<p>where <span class="math inline">\({\bf w}\)</span> is the vector of model parameters (the weight of each input) that we will learn in the training process. The model potentially includes a “bias” term <span class="math inline">\({\bf w_0}\)</span> for <span class="math inline">\({\bf x_0}=1\)</span>. The nonlinear function <span class="math inline">\(\sigma()\)</span> could be a <a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a>. function between 0 and 1 – but recently most models use the <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>. function, which is simpler to compute.</p>
+<p>The input weights at layer-k are represented by the matrices <span class="math inline">\({\bf W_k}\)</span> (applied on the average neighbor embedding from the previous layer) and <span class="math inline">\({\bf B_k}\)</span> (applied on the embedding of the node at the previous layer). We will see how to compute these matrices in the next page, when we discuss how to train GNN models.</p>
+<p>We are now ready to present the complete equation for the embedding of node <span class="math inline">\({\bf v}\)</span> at layer <span class="math inline">\({\bf k}\)</span> – this is exactly what the GNN computes for each node and at each layer:</p>
+<p><img src="assets/L14_deep_embed2.png" class="img-fluid"></p>
+<p>Note that the model captures the topology of the graph through the local neighborhood <span class="math inline">\({\bf N(v)}\)</span> of each node. At the first hidden layer, the model only “knows” about the direct neighbors of each node. At layer-2, however, it also knows about the neighbors of the neighbors. If the neural network is sufficiently deep (large <span class="math inline">\({\bf k}\)</span>), the model can learn quite subtle structural properties of the graph because it has information about all neighbors of each node within a broader neighborhood that is <span class="math inline">\({\bf k}\)</span>-hop wide.</p>
+<p>Another important point in the previous equation is that the parameters of the model, given by the matrices <span class="math inline">\({\bf W_k}\)</span> and <span class="math inline">\({\bf B_k}\)</span> for each layer, are shared across nodes at layer-<span class="math inline">\({\bf k}\)</span>, i.e., we do not need to learn different parameters for each node. This is how GNNs accomplish two important goals: first, significant reduction in the complexity of the model (because they do not need to learn different parameters for each node) and second, the model has inductive capabilities because it can apply these matrices even on nodes that are not in the training dataset.</p>
+<p><img src="assets/L14_deep_embed3.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<ol type="1">
+<li>There is a “hidden assumption” behind the idea of using the same parameters for all nodes at each layer. How would you precisely state that assumption?</li>
+<li>What is the rationale for NOT using the same shared parameters at every layer?</li>
+</ol>
+</blockquote>
+</section>
+<section id="gnn-training-and-decoders" class="level3">
+<h3 class="anchored" data-anchor-id="gnn-training-and-decoders">GNN Training and Decoders</h3>
+<p>Let us now see how to train a GNN, i.e., how to compute the model parameters given some training data.</p>
+<p>For simplicity, let us consider a binary node classification task in which we aim to distinguish whether each node of an online social network is human (class-0) versus bot (class-1). Classification tasks with a larger number of classes, or non-classification tasks (such as node clustering, link prediction, etc) can be performed similarly, with minor modifications in the following loss function.</p>
+<p>Suppose that the neural network consists of <span class="math inline">\({\bf K}\)</span> hidden layers. The final embedding of each node <span class="math inline">\({\bf v}\)</span> is denoted by <span class="math inline">\({\bf z_v=h_v^K}\)</span>.</p>
+<p>We need to also design the “decoder” part of the neural network, which maps the embedding vector <span class="math inline">\({\bf z_v}\)</span> to the corresponding class of node <span class="math inline">\({\bf v}\)</span>. The simplest decoder is a “<strong>softmax</strong>” operator with parameters <span class="math inline">\({\bf D}\)</span>, where <span class="math inline">\({\bf D}\)</span> is a vector of the same dimensionality as the embedding vector. The output of the softmax is given by the activation function of the dot-product between the transpose of the embedding vector <span class="math inline">\({\bf z_v}\)</span> and <span class="math inline">\({\bf D}\)</span>:</p>
+<p><span class="math display">\[
+\sigma\left(z_v^T D\right)
+\]</span></p>
+<p>So, if the softmax output for node <span class="math inline">\({\bf v}\)</span> is closer to 0, we predict that node <span class="math inline">\({\bf v}\)</span> is in class-0, and if it is closer to 1 we predict that node <span class="math inline">\({\bf v}\)</span> is in class-1.</p>
+<p>How can we compute all the parameters of the GNN model, including both the encoder (the part of the network that computes the embeddings with parameters <span class="math inline">\({\bf W_k}\)</span> and <span class="math inline">\({\bf B_k}\)</span> for k=1,2,…K) and the decoder (with parameters <span class="math inline">\({\bf D}\)</span>)?</p>
+<p>Suppose that we are given some training data: the actual class <span class="math inline">\({\bf y_v}\)</span> (0 or 1) for a set <span class="math inline">\({\bf V'}\)</span> of nodes in the network. We can then compute the following loss function, which is known as cross-entropy loss:</p>
+<p><span class="math display">\[
+\mathcal{L}=-\sum_{v \in V'} \left[y_v \log\left(\sigma(z_v^T D)\right) + (1-y_v) \log\left(1-\sigma(z_v^T D)\right)\right]
+\]</span></p>
+<p>Note that when the softmax output for node <span class="math inline">\({\bf v}\)</span> is close to the actual class of that node, i.e., when <span class="math inline">\(y_v \approx \sigma\left(z_v^T D\right)\)</span>, the contribution of node v in the loss is almost 0. Otherwise, when the model predicts the wrong class for node <span class="math inline">\({\bf v}\)</span>, i.e., when <span class="math inline">\(y_v + \sigma\left(z_v^T D\right) \approx 1\)</span>,node <span class="math inline">\({\bf v}\)</span> contributes significantly to the loss.</p>
+<p>So, we can train the neural network to minimize the previous loss function by selecting appropriate model parameters: <strong><span class="math inline">\(W_k, B_k  (k=1,2,...K)\)</span></strong> and <strong>D</strong>. This optimization is not convex, and so all neural network learning algorithms rely on numerical approaches such as variations of Stochastic Gradient Descent (SGD).</p>
+<p>After we have computed the previous parameters, we can use the GNN model to classify any node in the network, including those for which we do not have training data.</p>
+<p>Additionally however, we can compute embeddings (and then classify) even for nodes that were not present in the original network. The following figure illustrates this application of GNNs in the context of dynamic graphs. Suppose that the GNN was trained based on the grey portion of the graph. At some point later, node u joins the network. We can still use the same GNN, without retraining it, to compute the embedding of node u – and then to classify it. Obviously this approach will only work as long as the new nodes that join the network follow the same structural properties that the original network had.</p>
+<p><img src="assets/L14_gnn.png" class="img-fluid"> <em>All images in this page are from Jure Leskovec , “Representation Learning on Networks” tutorial, WWW 2018</em></p>
+<p>Another application of GNNs is to generalize from one or more given graphs to entirely new graphs – as long as we have reasons to believe that the new graphs have the same structural properties with the given graphs. For instance, in the context of protein-protein interaction networks, we may have such graphs from closely related bacterial species (e.g., Salmonella typhi and Salmonella typhimurium). We can then learn a GNN model based on these known graphs and apply that GNN to predict properties of proteins in novel Salmonella species, as shown in the following Figure.</p>
+<p><img src="assets/L14_gnn1.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<ol type="1">
+<li>How would you modify the previous loss function in the case of multiple classes (multinomial classification)?</li>
+<li>Suppose that the task is not how to classify nodes – but to predict the presence of links between nodes. How would you train the GNN model in that case given a training graph?</li>
+</ol>
+</blockquote>
+</section>
+<section id="application-polypharmacy" class="level3">
+<h3 class="anchored" data-anchor-id="application-polypharmacy">Application: Polypharmacy​</h3>
+<p><img src="assets/L14_poly.png" class="img-fluid"></p>
+<p>Polypharmacy means that a patient receives multiple medications at the same time. It is common with complex diseases and coexisting conditions but it has high risk of side effects due to drug interactions. 15% of the US population is affected by Polypharmacy and the annual costs exceed 177 billion. It is also difficult to identify manually because it is rare. It occurs only in a small subset of patients and it is not observed during clinical testing.</p>
+<p><img src="assets/L14_poly1.png" class="img-fluid"></p>
+<p>Here is an example of how to model Polypharmacy with a network. The network is multimodal because there are different types of nodes and edges. The green nodes represent drugs, while the orange node represent genes and the corresponding proteins that are encoded by these genes. The edge is between genes represent protein-protein interactions and edge between a gene and the drug means that drug targets the corresponding protein. And the edges between two drugs represent interactions between these two drugs. Those edges are labeled as you see with <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> and so on. The label of such an edge represents the side effect that would be cause if those two medications are taken together. Such networks can be constructed based on genomic data, patient population data and known side effects of different drug combinations. If we have any additional information about proteins or drugs, it can be included in hte model as different node features.</p>
+<p>In this visualization the neighbors of the antibiotic called ciprofloxacin node C indicate that this drug targets four proteins and it interacts with three other drugs. Ciprofloxacin which is node C, taken together with doxycycline which is node D, or with Simvastatin node S increase the risk of bradycardia. Bradycardia side effect is represented in this graph with the edges that are labeled with <span class="math inline">\(r_2\)</span>. The combination of Ciprofloxacin with mupirocin which is the mode M, on the other hand, increases the risk of gastrointestinal bleeding which is represented by the edge labeled as <span class="math inline">\(r_1\)</span>. The goal of this graph neutral network model called decagon, is to predict unknown edges between drugs. Decagon predicts associations basically between pairs of drugs with a goal of identifying side effects that cannot be attributed to either individual drug in the pair.</p>
+<p><img src="assets/L14_poly2.png" class="img-fluid"></p>
+<p>Here is an example of neural networks encoder. What you see at the right is the per layer update for a single graph node. The node representing ciprofloxacin node C, the hidden state activations from neighboring nodes are gathered and then transformed for each relation tie specifically. The top-left rectangle shows the contribution of the <span class="math inline">\(r_1\)</span> edge on the activation of node C at layer k plus 1. The activation depends on the activation of node C at the previous layer, layer k as well as the activation of node M at layer k. Similarly the middle rectangle at the right shows the contribution of the <span class="math inline">\(r_2\)</span> edges on the activation of node C. The bottom rectangle shows the contribution of the four target genes on the activation of node C. These three representations are accumulated in a normalized sum and then passed through a non-linear activation functions such as a Relu to product the hidden state of node C at layer k plus 1. Sets per node update are computed in parallel across the whole network with shared parameters for each type of edge.</p>
+<p><img src="assets/L14_poly.png" class="img-fluid"></p>
+<p>Let us now see how Decagon can predict the existence of unknown side effects for a pair of drugs. This is the decoder part of the Decagon network. Suppose for example, that we want to examine if two drugs, C and S have the side effect represented by each relation type <span class="math inline">\(r_1\)</span>, <span class="math inline">\(r_2\)</span>, all the way to <span class="math inline">\(r_n\)</span>. For each of these relations, the Decagon decoder takes the pair of embeddings for nodes C and S, and it produces a score for every potential relation edge between these two nodes through a fully connected neural layer that is unique for each relation. This type of inductive inference is possible because even though the Decagon neural network is different for each node, all of these networks says the same trainable parameters for each type of edge. So the trainable parameters that refer to the relation <span class="math inline">\(r_2\)</span> which is bradycardia are the same independent of whether those parameters are used for the side effects of drug C, or S or D.</p>
+</section>
+<section id="advanced-topics-deep-generative-models-for-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-topics-deep-generative-models-for-graphs">Advanced Topics: Deep Generative Models for Graphs</h3>
+<p><img src="assets/L14_advance.png" class="img-fluid"> <em>Source: “Machine Learning with Graphs” – Jure leskovec http://web.stanford.edu/class/cs224w/​</em></p>
+<p>We have already studied several network generation models in this course (mostly in Lesson-12 but also in earlier lessons). For instance, we have seen models with only one or two parameters (such as the Erdós-Rényì model or the preferential attachment model) as well as models with more parameters that can create networks with modular or hierarchical structure (such as stochastic block models). All of these models however are based on <strong>explicit</strong>, or <strong>prescribed</strong>, assumptions about the desired structure of the network. For example, we choose to use the preferential attachment model if we want to create a network with a power-law degree distribution of a certain exponent.</p>
+<p>What if we want to generate networks that have similar structure with one (or more) given real networks – but we do not have an explicit structural characterization of those networks? For example, given a portion of the Facebook friendship graph, we may be asked to create several synthetic networks that have the same structural properties with the Facebook graph – even though we may not be in a position to list (or even know!) all those structural properties.</p>
+<p>As shown in part-(a) of the above Figure, the goal in that case is to use one or more given graphs (the data) to learn a high-dimensional joint distribution (the model) that gives the probability that any two nodes are connected given the connectivity between all other nodes in a graph. We can then use that model to create many synthetic networks, of arbitrary size, with the expectation that all those networks share the same structural properties with the given data.</p>
+<p>The main challenges in developing graph generative models are:</p>
+<ul>
+<li>the generative model should be able to generate graphs of arbitrary size and density. In practice this is difficult if the given data only refer to networks of a given size and density (e.g., it is hard to generate realistic dense networks if all the data refer to sparse networks).</li>
+<li>the generative model needs to consider the issue of “graph isomorphism”, meaning that some networks may appear different (e.g., we may have ordered/labeled the nodes in different ways) even though the networks are identical (or almost identical) in terms of structure.</li>
+<li>the generative model needs to learn all non-trivial structural properties of the given graphs, such as degree correlations, community structure, hierarchy, and many others, without being explicitly trained to capture any of these properties.</li>
+</ul>
+<p>This is an active research area that spans both network science and machine learning. Most of the state-of-the-art “generative graph models” rely on deep neural networks, as shown in Figures (b) and (c) above. The deep learning architectures that have been adapted in this context are: variational auto-encoders, deep Q-networks (reinforcement learning), generative adversarial networks (GANs), and generative recursive neural networks (RNNs). We will not discuss these approaches in more depth here because they require prior knowledge in deep learning.</p>
+<p>If you are interested to learn more about this topic, we recommend the 2020 article: <a href="https://arxiv.org/abs/2007.06686">“A systematic survey on deep generative models for graph generation”</a> by X.Guo and L.Zhao.</p>
+<p>One application in which graph generative models has attracted large interest is in computational chemistry (molecule design) and drug synthesis. Discovering a new molecule that is similar to existing molecules (e.g.&nbsp;a given set of antibiotics) is a very expensive and time-consuming process, especially if every candidate molecule is to be chemically synthesized and tested at the lab. Network science and deep learning techniques have been used to propose good molecular candidates (graphs between chemical elements) that have a high “score” in terms of their similarity to existing molecules.</p>
+<p>The additional challenge, however, is that these candidate networks need to represent valid molecules. For instance, they need to satisfy the valency of each atom in the molecule so that the resulting chemical is stable. Another challenge is that the candidate networks should be, not just similar, but better than the given molecules in terms of various properties (e.g., a new antibiotic should be effective to bacteria that are already resistant to the existing antibiotics that are used as data in the corresponding generative model).</p>
+<p>A recent survey of methods in this area is <a href="https://pubs.rsc.org/en/content/articlelanding/2019/me/c9me00039a/unauth#!divAbstract">“Deep learning for molecular design”</a> by D.Elton et al.&nbsp;</p>
+</section>
+<section id="advanced-topics-interdependent-networks" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-topics-interdependent-networks">Advanced Topics: Interdependent Networks</h3>
+<p><img src="assets/L14_Interdependent.png" class="img-fluid"></p>
+<p>Another emerging topic of network science is that of interdependent networks or multi-layered networks. This illustration refers to a cascade of power failures that took place in 2003 in the power distribution network of Italy. We see two networks, on the map of Italy, we see the network of power generators while the network of computer severs that control those power generators is shown at the right over the map of Italy, It is important to understand that in order for a power generator to operate properly, it has to be controlled by one of those computer servers. In order for the computer severs to operate properly, they need to have power. So the two networks are interdependent.</p>
+<p>At the first step of the process, one of the power generators shown here is red, went offline. Three of the computers servers went also offline because they depended on that power generator. The nodes that are shown in green here are nodes that will go offline at the next step of the process. Indeed at the next step of the process, some additional computer severs went offline causing two more power generators to go offline shown here in red.</p>
+<p><img src="assets/L14_Interdependent1.png" class="img-fluid"></p>
+<p>In the final step of the process, as you see, about half of the country went offline because all of those south power generators went offline together with the computer servers that control them. This is an example of an interdependent network. In many real-world systems there are such interdependencies between networks. For example in transportation, if there is a disruption in airlines because of a volcanic eruption or something else, many more passengers will start traveling by trains, buses or cars, potentially causing congestion on the land transportation network.</p>
+<p><img src="assets/L14_Interdependent2.png" class="img-fluid"> ### Advanced Topics: Temporal Networks</p>
+<p>An active research area in Network Science is the study of Temporal Networks. In such networks, nodes and edges may be present only for specific time periods. For instance, a network that shows the phone communications between people may represent each call with an edge that has a specific start and end-time. Note that the transitivity property does not apply in temporal networks, in the sense that if node-A connects to node-B, and node-B connects to node-C, we cannot conclude that node-A connects to node-C.</p>
+<p>For instance, Figure-a represents the communications between six people, arranged temporally in six time steps. For instance, during the first time period (t1) node-A contacted node-B, and node-C contacted node-F. If we ignore the temporal ordering of the links, we can reach completely wrong conclusions about the communication flows that are possible in a given network. For instance, if node-A is the only node with some information at time t1, is it possible that this information will ever reach node-F during the following six time steps?</p>
+<p><img src="assets/L14_advance1.png" class="img-fluid"> <em>Source: <a href="https://www.cl.cam.ac.uk/~cm542/phds/johntang.pdf">“Temporal network metrics and their application to real world networks”</a> (Figure 4.5) by J.K.Tang.</em></p>
+<p>Figure-b shows that there are actually two different “temporal paths” from node-A to node-F. In one of them node-F would obtain the information at time t4, while in the other at t6.</p>
+<p>We could also ask: what is the earliest time at which each node in the graph could receive this information? This is shown in Figure-c, referred to as the “minimum temporal spanning tree” originating at node-A.</p>
+<p>These are only a couple of the many interesting questions we can ask about temporal networks. The temporal structure of edge activations can significantly affect the dynamics of processes that are taking place on a network, such as epidemics, information diffusion, or synchronization. Additionally, the metrics we have defined earlier to quantify the centrality of nodes (or groups of nodes) have to be modified in temporal networks so that they only consider temporally-valid paths.</p>
+<p>If you are interested to learn more about Temporal Networks, we recommend the recent book <a href="https://www.worldscientific.com/worldscibooks/10.1142/q0033">“A Guide to Temporal Networks”</a> by R.Lambiotte and N.Masuda.</p>
+</section>
+<section id="lesson-summary" class="level3">
+<h3 class="anchored" data-anchor-id="lesson-summary">Lesson Summary</h3>
+<p>This lesson focused on the overlap between Network Science and Machine Learning, with an emphasis on Deep Learning and Graph Neural Networks.</p>
+<p>This is a relatively new area that has been mostly pursued in the research literature in the last five years or so.</p>
+<p>The applications of this emerging area are numerous – mostly because many real-world problems can be modeled with graphs and because Deep Learning has enormous capabilities to learn complex features from data without the burden of manual <strong>“feature engineering”</strong>.</p>
+<p>We should also mention however the main drawbacks of the Deep Learning approach:</p>
+<p>First, the resulting models are over-parameterized (thousands or even millions of parameters!) – compare that with models such as Preferential Attachment that have only one parameter, or even Stochastic Block Graphs in which the number of parameters scales with the number of communities. Models with too many parameters may overfit the data and they can be computationally expensive in terms of training.</p>
+<p>Second, Deep Learning models are often viewed as <strong>“black boxes”</strong>, i.e., they are not transparent in terms of how the (automatically identified) features relate to the given task. For example, if a neural network classifies the node of an online social network as <strong>“bot”</strong> (instead of human), we may not know why.</p>
+<p>Third, Deep Learning models typically require lots of training data. This is not a problem as long as we are working with large graphs, or many graphs, and we have labeled data for the nodes and edges of those graphs. For smaller networks however, it may be more appropriate to rely on simpler models, such as those studied in Lesson-12.</p>
+<p>The last part of this lesson also mentioned some other state-of-the-art network science topics (such as interdependent networks or temporal networks) that we do not have time unfortunately to cover in more detail. If you are interested to learn more about these topics, please refer to the provided references.</p>
+<!-- Dummy line -->
+<!-- {% include embed/youtube.html%} -->
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dnouri3\.github\.io\/gt-network-science-notes\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecture-13.html" class="pagination-link" aria-label="Lecture 13">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lecture 13</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

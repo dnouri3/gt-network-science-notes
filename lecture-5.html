@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>gt-nsci-l5 – GT Network Science Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecture-6.html" rel="next">
+<link href="./lecture-4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f503c0b15d9f8f334cec1fc4b8652841.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-54f67416df7f62e5f91c855543863998.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  </head><body class="nav-sidebar floating quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>true
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="default_style.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture-5.html">Lecture 5</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Science - CS 7280 OMSCS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quick-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quick Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 11</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 13</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 14</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#l5-clustering-and-small-world" id="toc-l5-clustering-and-small-world" class="nav-link active" data-scroll-target="#l5-clustering-and-small-world">L5: Clustering and Small World</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#clustering-coefficient" id="toc-clustering-coefficient" class="nav-link" data-scroll-target="#clustering-coefficient">Clustering Coefficient</a></li>
+  <li><a href="#average-clustering-and-transitivity-coefficient" id="toc-average-clustering-and-transitivity-coefficient" class="nav-link" data-scroll-target="#average-clustering-and-transitivity-coefficient">Average Clustering and Transitivity Coefficient</a></li>
+  <li><a href="#clustering-in-weighted-networks" id="toc-clustering-in-weighted-networks" class="nav-link" data-scroll-target="#clustering-in-weighted-networks">Clustering in Weighted Networks</a></li>
+  <li><a href="#clustering-in-gnp-networks" id="toc-clustering-in-gnp-networks" class="nav-link" data-scroll-target="#clustering-in-gnp-networks">Clustering in G(n,p) networks</a></li>
+  <li><a href="#clustering-in-regular-networks" id="toc-clustering-in-regular-networks" class="nav-link" data-scroll-target="#clustering-in-regular-networks">Clustering in Regular Networks</a></li>
+  <li><a href="#diameter-characteristic-path-length-and-network-efficiency" id="toc-diameter-characteristic-path-length-and-network-efficiency" class="nav-link" data-scroll-target="#diameter-characteristic-path-length-and-network-efficiency">Diameter, Characteristic Path Length, and Network Efficiency</a></li>
+  <li><a href="#diameter-and-cpl-of-gnp-networks" id="toc-diameter-and-cpl-of-gnp-networks" class="nav-link" data-scroll-target="#diameter-and-cpl-of-gnp-networks">Diameter and CPL of G(n,p) Networks</a></li>
+  <li><a href="#diameter-and-efficiency-of-gnp-versus-regular-networks" id="toc-diameter-and-efficiency-of-gnp-versus-regular-networks" class="nav-link" data-scroll-target="#diameter-and-efficiency-of-gnp-versus-regular-networks">Diameter and Efficiency of G(n,p) Versus Regular Networks</a></li>
+  <li><a href="#what-does-small-world-network-mean" id="toc-what-does-small-world-network-mean" class="nav-link" data-scroll-target="#what-does-small-world-network-mean">What Does “Small-world” Network Mean?</a></li>
+  <li><a href="#clustering-in-pa-model" id="toc-clustering-in-pa-model" class="nav-link" data-scroll-target="#clustering-in-pa-model">Clustering in PA Model</a></li>
+  <li><a href="#length-of-shortest-paths-in-pa-model" id="toc-length-of-shortest-paths-in-pa-model" class="nav-link" data-scroll-target="#length-of-shortest-paths-in-pa-model">Length of Shortest Paths in PA Model</a></li>
+  <li><a href="#path-lengths-in-power-law-networks" id="toc-path-lengths-in-power-law-networks" class="nav-link" data-scroll-target="#path-lengths-in-power-law-networks">Path Lengths in Power-law Networks</a></li>
+  <li><a href="#directed-subgraph-connectivity-patterns" id="toc-directed-subgraph-connectivity-patterns" class="nav-link" data-scroll-target="#directed-subgraph-connectivity-patterns">Directed Subgraph Connectivity Patterns</a></li>
+  <li><a href="#statistical-test-for-the-frequency-of-a-network-motif" id="toc-statistical-test-for-the-frequency-of-a-network-motif" class="nav-link" data-scroll-target="#statistical-test-for-the-frequency-of-a-network-motif">Statistical Test For The Frequency of a Network Motif</a></li>
+  <li><a href="#frequent-motifs-and-their-function" id="toc-frequent-motifs-and-their-function" class="nav-link" data-scroll-target="#frequent-motifs-and-their-function">Frequent Motifs and Their Function</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<hr>
+<div class="lecture-nav">
+<p><a href="./lecture-4.html" class="nav-prev">← Lecture 4</a> <a href="./lecture-6.html" class="nav-next">Lecture 6 →</a></p>
+</div>
+<section id="l5-clustering-and-small-world" class="level2">
+<h2 class="anchored" data-anchor-id="l5-clustering-and-small-world">L5: Clustering and Small World</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Readings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Required Reading</strong></p>
+<ul>
+<li>Sections 3.8, 3.9, 5.10 from A-L. Barabási, <a href="http://barabasi.com/networksciencebook/">Network Science</a>, 2015</li>
+<li>Sections 3.1, 3.2, 20.1, 20.2 - D. Easley and J. Kleinberg, <a href="https://www.cs.cornell.edu/home/kleinber/networks-book/">Networks, Crowds and Markets</a>., Cambridge Univ Press, 2010 (also available <a href="https://www.cs.cornell.edu/home/kleinber/networks-book/networks-book.pdf">online</a>).</li>
+<li><a href="https://www.pnas.org/doi/full/10.1073/pnas.2133841100">Structure and function of the feed-forward loop network motif</a>. S. Mangan and U. Alon, PNAS October 14, 2003 100 (21) 11980-11985</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-coefficient">Clustering Coefficient</h3>
+<p>In social networks, it is often the case that if A is a friend of B and C, then B and C are also likely to be friends with each other. In other words, A, B, and C form a “<strong>friendship triangle</strong>”. The presence of such triangles is quite common in almost all real-world networks.</p>
+<p>To quantify the presence of such triangles of connected nodes, we can use the <strong>Clustering Coefficient</strong>. For a node-i with at least two neighbors, this metric is defined as the fraction of its neighbors’ pairs that are connected.</p>
+<p>Mathematically, suppose that the network is undirected, unweighted, and described by an adjacency matrix A. The clustering coefficient for node-i is defined as:</p>
+<p><span class="math display">\[
+C_i = \frac{1/2 \, \sum_{j,m} A_{i,j}A_{j,m}A_{m,i}}{k_i (k_i-1)/2} = \frac{\sum_{j,m} A_{i,j}A_{j,m}A_{m,i}}{k_i (k_i-1)}
+\]</span></p>
+<p>The denominator at the left fraction is the number of distinct neighbor pairs of node-i, while the numerator is the number of those pairs that form triangles with node-i. If the degree of node-i is one or zero, the clustering coefficient is not well-defined.</p>
+<p><img src="assets/L5_cluster.jpeg" class="img-fluid"></p>
+<p>The visualization at the top shows three examples in which node-i is the purple node. As you see, the clustering coefficient quantifies the extent to which node-i and its direct neighbors form an interconnected cluster. If they form a clique the clustering coefficient is maximized (one) – while if they form a star topology with node-i at the center the clustering coefficient is minimized (zero).</p>
+<p>We often want to describe the clustering coefficient not only of one node in the network – but of all nodes. One way to do so is with the plot at the below.</p>
+<p><img src="assets/L5_cluster1.jpeg" class="img-fluid"></p>
+<p>For every degree-k, the plot shows the average clustering coefficient C(k) of all nodes with degree k&gt;1. Typically there is a decreasing trend in C(k) as k increases, suggesting that it becomes less likely to find densely interconnected clusters of many nodes compared to clusters of fewer nodes.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>In signed social networks, where a positive edge may represent friends while a negative edge may represent enemies, the “triadic closure” property also relates to the stability of that triangle. Which signed triangles do you think are unstable, meaning that one or more edges will probably be removed over time?</p>
+</blockquote>
+</section>
+<section id="average-clustering-and-transitivity-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="average-clustering-and-transitivity-coefficient">Average Clustering and Transitivity Coefficient</h3>
+<p><img src="assets/L5_avg_cluster.jpeg" class="img-fluid"></p>
+<p>If we want to quantify the degree of clustering in the entire network with a single number, we have two options. The first is to simply calculate the <strong>Average Clustering Coefficient</strong> for all nodes with degree larger than one.</p>
+<p>A better metric, however, is to calculate the <strong>Transitivity (or global clustering coefficient)</strong>, which is defined as the <strong>fraction of the connected triplets of nodes that form triangles.</strong></p>
+<p>Mathematically, the transitivity is defined as:</p>
+<p><span class="math display">\[
+T = \frac{\mbox{3} \times\mbox{Number of triangles}} {\mbox{Number of connected triplets}}
+\]</span></p>
+<p>A connected triplet is an ordered set of three nodes ABC such that A connects to B and B connects to C. For example, an A, B, C triangle corresponds to three triplets, ABC, BCA, and CAB. In contrast, a chain of connected nodes A, B, C, in which B connects to A and C, but A does not link to C, forms an open triplet ABC. The factor three in the previous equation is needed because each triangle is counted three times in the triplet count.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Note that the Transitivity and the Average Clustering Coefficient are two different metrics. They may often be close but there are also some extreme cases in which the two metrics give very different answers. To see that consider a network in which two nodes A and B are connected to each other as well as to every other node. There are no other links. The total number of nodes is n.&nbsp;What would be the transitivity and average clustering coefficient in this case (you can simplify by assuming that n is quite large)?</p>
+</blockquote>
+</section>
+<section id="clustering-in-weighted-networks" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-in-weighted-networks">Clustering in Weighted Networks</h3>
+<p>The definition of clustering coefficient can also be generalized for weighted networks as follows. Suppose that <span class="math inline">\(w_{i,j}\)</span> is the weight of the edge between nodes i and j.</p>
+<p>First, in weighted networks, instead of the degree of a node we often talk about its “strength”, defined as the sum of all weights of the node’s connections:</p>
+<p><span class="math display">\[
+s_i = \sum_j A_{i,j} \, w_{i,j}
+\]</span></p>
+<p>Then, the weighted clustering coefficient of node i is defined as:</p>
+<p><span class="math display">\[
+C_{w}(i) = \frac{1}{s_i \, (k_i-1)} \sum_{j,h} \frac{w_{i,j}+w_{i,h}}{2} A_{i,j}A_{i,h}A_{j,h}
+\]</span></p>
+<p><img src="assets/L5_weighted.jpeg" class="img-fluid"> <em>Comparison of weighted and unweighted clustering coefficient for an example graph.</em></p>
+<p>The normalization term <span class="math inline">\(\frac{1}{s_i \, (k_i-1)}\)</span> is such that the maximum value of the weighted clustering coefficient is one.</p>
+<p>The product of the three adjacency matrix elements at the right is one only if the nodes <span class="math inline">\(i,j,h\)</span> form a triangle. In that case, that triangle contributes to the clustering coefficient of node-i based on the average weight of the two edges that connect node i with j and h, respectively. Note that the weight between nodes j and h does not matter.</p>
+<p>The visualization shows the unweighted and weighted clustering coefficient values for the darker node. That node has a stronger connection with a node that does not belong to the cluster of nodes at the lower-left side. This is why the weighted clustering coefficient is lower than the unweighted.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>How would you generalize the definition of Transitivity for weighted networks?</p>
+</blockquote>
+</section>
+<section id="clustering-in-gnp-networks" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-in-gnp-networks">Clustering in G(n,p) networks</h3>
+<p>How large is the expected clustering coefficient at a random ER network (i.e., a network constructed using the G(n,p) model from Lesson-3)?</p>
+<p>Recall that any two nodes in that model are connected with the same probability p.&nbsp;So, the probability that a connected triplet A-B-C forms a triangle (A-B-C-A) is also p.&nbsp;Thus, the expected value of the clustering coefficient for any node with more than one connection is p.&nbsp;Similarly, the transitivity (and the average clustering coefficient) of the whole network is also expected to be p.</p>
+<p>In G(n,p), the average degree is <span class="math inline">\(\bar{k}=p \, (n-1)\)</span>. So, if the average degree remains constant, we expect p to drop inversely proportional with n as the network size grows. This means that if real networks follow the G(n,p) model, we would see a decreasing trend between the clustering coefficient and the network size.</p>
+<p><img src="assets/L5_cluster_gnp.jpeg" class="img-fluid"> <em>Figure 3-13 from networksciencebook.com</em></p>
+<p>This is not the case with real networks however. The plot shows the average clustering coefficient, normalized by the average degree, as a function of the network size N. In the G(N,p) model, this normalized version of the average clustering coefficient should be equal to 1/N (shown as a green line in the plot). The various colored dots show the clustering coefficient for several real-world networks that appear in Table 3.2 of your textbook. These networks have widely different sizes, ranging from a thousand nodes to almost a million. Note that their clustering coefficient does not seem to get smaller as the network size increases.</p>
+<p>The main message here is that the G(n,p) model predicts negligible clustering, especially for large and sparse networks. On the contrary, real-world networks have a much higher clustering coefficient than G(n,p) and its magnitude does not seem to depend on the network size.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>The transitivity (<em>and clustering coefficient</em>) focuses on a microscale property of a network, in the sense that it shows how likely it is that connected triplets form triangles. How would you explain that the value of this metric does not seem to depend on the size of the overall network in practice? What does that imply about the mechanisms that guide the formation of such networks?</p>
+</blockquote>
+</section>
+<section id="clustering-in-regular-networks" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-in-regular-networks">Clustering in Regular Networks</h3>
+<!-- 
+<video controls src="assets/L5_ What Does “Small-world” Network Mean__ Network Science - CS-7280-O01, OAN.mp4" title="L51-1" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+
+</video>
+
+<video controls src="assets/L5_ What Does “Small-world” Network Mean__ Network Science - CS-7280-O01, OAN (1).mp4" title="L5-2" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+
+</video>
+
+<video controls src="assets/L5_ What Does “Small-world” Network Mean__ Network Science - CS-7280-O01, OAN (2).mp4" title="L5-3" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+
+</video> -->
+<video controls="" src="http://files.darien.cloud/L5_-What-Does-Small-world-Network-Mean__-Network-Science-CS-7280-O01-OAN.mp4" title="L51-1" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+</video>
+<video controls="" src="http://files.darien.cloud/L5_-What-Does-Small-world-Network-Mean__-Network-Science-CS-7280-O01-OAN-1-.mp4" title="L5-2" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+</video>
+<video controls="" src="http://files.darien.cloud/L5_-What-Does-Small-world-Network-Mean__-Network-Science-CS-7280-O01-OAN-2-.mp4" title="L5-3" style="max-width: 80%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+</video>
+<p><img src="assets/L5_cluster_regular.png" class="img-fluid"></p>
+<p>On the other hand, regular networks typically have a locally clustered topology. The exact value of the clustering coefficient depends on the specific network type but in general, it is fair to say that “<strong>regular networks have strong clustering</strong>”. Further, the clustering coefficient of regular networks is typically independent of their size.</p>
+<p>To see that, let’s consider the common regular network topology shown at the visualization. The n nodes are placed in a circle, and every node is connected to an even number c of the nearest neighbors (c/2 at the left and c/2 at the right). If c=2, this topology is simply a ring network with zero clustering (no triangles). For a higher (even) value of c however, the transitivity coefficient is:</p>
+<p><span class="math display">\[
+T = \frac{3(c-2)}{4(c-1)}
+\]</span></p>
+<p>Note that this does not depend on the network size. Additionally, as c increases the transitivity approaches ¾.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Prove the previous formula for the transitivity coefficient.</p>
+</blockquote>
+</section>
+<section id="diameter-characteristic-path-length-and-network-efficiency" class="level3">
+<h3 class="anchored" data-anchor-id="diameter-characteristic-path-length-and-network-efficiency">Diameter, Characteristic Path Length, and Network Efficiency</h3>
+<p>The notion of small-world networks depends on two concepts: how clustered the network is (covered in the previous pages) and how short the paths between network nodes are – that we cover next.</p>
+<p>As you recall from Lesson-2 if a network forms a connected component we can compute the shortest-path length <span class="math inline">\(d_{i,j}\)</span> between any two nodes i and j. One way to summarize these distances for the entire network is to simply take the average such distance across all distinct node pairs. This metric L is referred to as <strong>Average (shortest) Path Length (APL)</strong> or <strong>Characteristic Path Length (CPL)</strong> of the network. For an undirected and connected network of n nodes, we define L as:</p>
+<p><span class="math display">\[
+L = \frac{2}{n(n-1)} \sum_{i &lt; j} d_{i,j}
+\]</span></p>
+<p>A related metric is the harmonic mean of the shortest-path lengths across all distinct node pairs, referred to as the <strong>efficiency</strong> of the network:</p>
+<p><span class="math display">\[
+E = \frac{2}{n(n-1)} \sum_{i &lt; j} \frac{1}{d_{i,j}}
+\]</span></p>
+<p>The efficiency varies between 0 and 1.</p>
+<p>Another metric that is often used to quantify the distance between network nodes is the <strong>diameter</strong>, which is defined as the maximum shortest-path distance across all node pairs:</p>
+<p><span class="math display">\[
+D = \max_{i &lt; j} d_{i,j}
+\]</span></p>
+<p>A more informative description is the distribution of the shortest-path lengths across all distinct node pairs, as shown in the visualizations below.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><img src="assets/L5_characteristics1.png" class="img-fluid"></td>
+<td style="text-align: left;"><img src="assets/L5_characteristics2.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+<p>At the left, the corresponding network is the largest connected component of the protein-protein interaction of yeast (2,018 nodes and 2,930 edges, the largest connected component include 81% of the nodes). The characteristic path length (CPL) is 5.61 while the diameter is 14 hops.</p>
+<p>At the right, the network is based on the friendship connections of Facebook users (all pairs of Facebook users worldwide and within the US only). The CPL is between 4 and 5, depending on the network.</p>
+</section>
+<section id="diameter-and-cpl-of-gnp-networks" class="level3">
+<h3 class="anchored" data-anchor-id="diameter-and-cpl-of-gnp-networks">Diameter and CPL of G(n,p) Networks</h3>
+<p><img src="assets/L5_diameter1.jpeg" class="img-fluid"></p>
+<p>Let us now go back to the simplest random graph model we have studied so far, i.e., the ER or G(n,p) model. What is the diameter of such a network?</p>
+<p>We can derive an approximate expression as follows.</p>
+<p>Suppose that the average degree is <span class="math inline">\(\bar{k}=(n-1)\, p &gt; 1\)</span> (so that the network has a giant connected component). We will further assume that the topology of the network is a <strong>tree</strong>.</p>
+<p>We start from node i. Within one hop away from that node, we expect to visit <span class="math inline">\(\bar{k}\)</span> nodes. Within two hops, we expect to visit approximately <span class="math inline">\((\bar{k})^2\)</span> nodes. And with a similar reasoning, after s hops we expect to visit approximately <span class="math inline">\((\bar{k})^s\)</span> nodes.</p>
+<p>The total number of nodes in the network is n however, and we expect to visit all of them with the maximum number of hops that is possible, which is the network diameter <span class="math inline">\(D\)</span>.</p>
+<p>So, <span class="math inline">\(n \approx (\bar{k})^D\)</span>. Solving for D, we get that</p>
+<p><span class="math display">\[
+D \approx \frac{\ln n}{\ln{\bar{k}}}
+\]</span></p>
+<p>Even though this expression is a very rough approximation, it shows something remarkable: in a random network, even the longest shortest—paths are expected to grow very slowly (i.e., <em>logarithmically</em>) with the size of the network.</p>
+<p>Here is a numerical example: suppose we have a social network that covers all people (around 7 billion today) and assumes that each person knows well 64 other people. According to the previous expression, any two people are connected to each other with a “social chain” (shortest-path) of 5.4 relations.</p>
+<p>Additionally, the CPL is lower (or equal) than the diameter of the network. So the average shortest-path length is also upper bounded by the same logarithmic expression we derived above.</p>
+<hr>
+<section id="the-diameter-of-gnp-networks-more-accurate-expressions" class="level4">
+<h4 class="anchored" data-anchor-id="the-diameter-of-gnp-networks-more-accurate-expressions">The diameter of G(n,p) networks – more accurate expressions</h4>
+<p>Two approximate expressions that are often used in practice apply for sparse and dense networks, respectively.</p>
+<p>Specifically, for very sparse networks, as k approaches to 1 from above (<em>so that the network is still expected to have a large connected component</em>), the diameter is expected to be</p>
+<p><span class="math display">\[
+D \approx 3 \frac{\ln n}{\ln{\bar{k}}}
+\]</span></p>
+<p>This is three times larger than the expression we derived in the previous page. For very dense networks, on the other hand, a good approximation for the diameter is:</p>
+<p><span class="math display">\[
+D \approx \frac{\ln n}{\ln{\bar{k}}} + \frac{2\ln n}{\bar{k}} + \ln n \frac{\ln \bar{k}}{(\bar{k})^2}
+\]</span></p>
+<p>Note that in both cases, the diameter is still increasing with the logarithm of the network size. So, the main qualitative conclusion remains what we stated in the previous page, i.e., the diameter of G(n,p) networks increases very slowly (logarithmically) with the number of nodes – and so the CPL cannot increase faster than that either.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<ul>
+<li>Enumerate all the assumptions we made in the derivation for the diameter of G(n,p) networks.</li>
+<li>Go back to the example of the previous page (<em>a social network with 7 billion nodes and an average degree of 64</em>). What would be the diameter according to either of the previous two approximations?</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="diameter-and-efficiency-of-gnp-versus-regular-networks" class="level3">
+<h3 class="anchored" data-anchor-id="diameter-and-efficiency-of-gnp-versus-regular-networks">Diameter and Efficiency of G(n,p) Versus Regular Networks</h3>
+<p>Does the diameter of all networks increase logarithmically? Clearly not. Let’s examine what happens in regular networks – and more specifically, in lattice networks.</p>
+<p>In one-dimensional lattices, each node has two neighbors, and the lattice is a line network of n nodes – so the diameter increases linearly with <span class="math inline">\(n\)</span>.</p>
+<p>In two dimensions, each node has 4 neighbors, and the lattice is a square with <span class="math inline">\(\sqrt{n}\)</span> nodes on each side – so the diameter increases as <span class="math inline">\(O(n^{1/2})\)</span></p>
+<p>Similarly, in three dimensions each node has 8 neighbors, and the diameter grows as <span class="math inline">\(O(n^{1/3})\)</span> – and so on in higher dimensions.</p>
+<p>This suggests that in lattice networks the diameter grows as a power-law of the network size – this grows much faster than a logarithmic function.</p>
+<p><img src="assets/L5_diameter_efficiency.png" class="img-fluid"></p>
+<p>Let us go back to the hypothetical social network of 7 billion humans – and with an average of 64 connections per person. If this social network was a regular lattice, it would need to have 6 dimensions so that each node has 64 connections. So the diameter would be in the order of <span class="math inline">\(n^{1/6}\)</span>, which is about 44 – this is much larger than the diameter we derived earlier for a random network of the same size and density.</p>
+<p>These simple derivations show a major qualitative difference between regular networks and random networks: in the former, the diameter and CPL increase much faster than in the latter – as a power-law in the former and logarithmically in the latter.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Pick a non-lattice regular network and examine if the diameter still increases as a power-law.</p>
+</blockquote>
+</section>
+<section id="what-does-small-world-network-mean" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-small-world-network-mean">What Does “Small-world” Network Mean?</h3>
+<p>A <strong>small-world network</strong> is a network that satisfies the small-world property. To determine if a network has small-world property, we compare two of its characteristics against an ensemble of random G(n,p) networks with the same size n and density p.</p>
+<p>For the first condition we check, is the clustering coefficient <strong>much larger</strong> than the random G(n,p) networks? This condition can be examined with an appropriate hypothesis test. For instance, the one-sample one-tailed t-test would examine, in this case, whether the clustering coefficient of the given network is significantly greater than the mean of the clustering coefficient values in the G(n,p) ensemble.</p>
+<p>For the second condition, we again check that the CPL of the given network is <strong>not significantly greater</strong> than the mean CPL value in the G(n,p) ensemble.</p>
+<p>Please note that whether the previous conditions hold or not may depend on the significance level (“alpha value”) of the corresponding hypothesis tests. Additionally, it may be that even though the given network has a CPL (for instance) that is greater than the mean of the CPL values in the G(n,p) ensemble, the difference may be small in absolute magnitude (e.g., 2.1 versus 2.0).</p>
+<section id="clustering-and-efficiency-in-real-world-networks" class="level4">
+<h4 class="anchored" data-anchor-id="clustering-and-efficiency-in-real-world-networks">Clustering and efficiency in real-world networks</h4>
+<p><img src="assets/L5_smallnetwork1.png" class="img-fluid"></p>
+<p>So far this lesson has focused on two network properties, the presence of clustering and the relation between diameter and network size. You may wonder what about real world networks? Where do they stand in terms of these two properties?</p>
+<p>An important discovery by Watts and Strogatz in 1998 was that the networks we often see in practice have the following two properties:</p>
+<ol type="1">
+<li>They have strong clustering similar to that of lattice networks with the same average degree,</li>
+<li>They have short paths similar to the characteristics path length and diameter we see in random Erdos-Renyi networks that we have same size n and density P as the real-world networks we were given.</li>
+</ol>
+<p>We refer to such networks as small-world networks. They are small in the sense that the shortest paths between nodes increase only modestly with a size of the network. Modestly means logarithmically or even slower. At the same time, small world networks are not randomly formed.</p>
+<p><img src="assets/L5_smallnetwork2.png" class="img-fluid"></p>
+<p>On the contrary, the nodes form clusters of interconnected triangles, similar to what we see in social groups, such as families, groups of friends, or larger organizations of people. The table that you see here shows the characteristics of some real-world networks.</p>
+<p>The column shows the network name, the number of nodes n, the number of edges L, the average degree, the characteristic path length, the diameter, and the predicted diameter based on the formula we derived earlier in the last column. Note that the characteristic path length is the same order of magnitude with what we would expect from a $G(n,p) random network.</p>
+<p>Additionally, this plot shows the clustering coefficient for each of these networks with different colors. All networks have a much larger clustering coefficient than what would be expected from a corresponding <span class="math inline">\(G(n,p)\)</span> network.</p>
+</section>
+<section id="watt-strogatz-model" class="level4">
+<h4 class="anchored" data-anchor-id="watt-strogatz-model">Watt Strogatz Model</h4>
+<p><img src="assets/L5_smallnetwork3.png" class="img-fluid"></p>
+<p>How can we create networks that have this small world property? Once such model was proposed by Watts and Strogatz in their 1998 paper that started the network science field. The model starts with a regular network with the desired number of nodes and average degree. The topology of the regular network is often the ring that we saw here (middle plot). With a small probability p, we select an edge and reassign one of its two stabs to a randomly chosen node as you see here. You may wonder, why do we expect that a small fraction of randomized edges will have any significant properties of this network?</p>
+<p>It turns out that even if this rewiring probability p is quite small, the randomized edges provides shortcuts that reduce the length of the shortest path between node pairs. As we will see next, even a small number of such shortcuts, meaning a rewiring probability p close to 1% is sufficient to reduce the characteristic path length and the diameter down to the same level with a corresponding random <span class="math inline">\(G(n,p)\)</span> network.</p>
+<p>At the same time, the rewired network is still highly clustered at the small level with the regular network we started from, as long as p, of course, is quite small.</p>
+<p>If this writing probability p was set to one, we should end up with a random <span class="math inline">\(G(n,p)\)</span> graph, which is what we see at the right. This network would have even shorter path, but it would not have any significant clustering.</p>
+<p><img src="assets/L5_smallnetwork4.png" class="img-fluid"></p>
+<p>There have been analytical studies of the Watts-Strogatz Model that derived the clustering coefficient or the diameter as a function of the rewiring probability p.&nbsp;For our purposes, it is sufficient to see some simulation results only. The visualization here refers to a network of 1,000 nodes with an average degree of 10.</p>
+<p>It also shows the average clustering coefficient normalized by the corresponding coefficient when p is equal to zero with green dots. The plot also shows the average path length with purple dots, also normalized by the corresponding metric when p is equal to 0. Note that the logarithmic scale on the x-axis.</p>
+<p>As you can see, when p is close to 1%, the clustering coefficient is still almost the same as the regular network we started with and the average path length is close to what we would expect from a random graph.</p>
+</section>
+<section id="degree-distribution-of-watts-strogatz-model" class="level4">
+<h4 class="anchored" data-anchor-id="degree-distribution-of-watts-strogatz-model">Degree distribution of Watts Strogatz Model</h4>
+<p>In lesson 4, we focused on the degree distribution of real-world networks, and so that many such networks have a power law degree distribution. You may wonder, is the Watts-Strogatz Model able to product networks with a power law degree distribution? The answer is no. The degree distribution of that model depends on the rewiring probability p.&nbsp;if p is close to 0, most nodes have the same degree. As p approaches 1, we get the poisson degree distribution of a random graph. In either way, the resulting degree distribution is not sufficiently skewed towards higher values. It cannot be mathematically modeled as a power law and we do see hubs. In summary, even though the Watts-Strogatz Model was a great first step in discovering two important properties of real-world networks, clustering and short paths, it is not a model that can construct realistic networks because it does not capture the degree distribution of many real-world networks.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<ol type="1">
+<li>Can you think of networks that have both weak clustering (similar to G(n,p)) and long paths (similar to regular networks)? Can you think of any real-world networks that may have these properties?</li>
+<li>The Watts-Strogatz model described above is only one possible model to create small-world networks. Can you think of other approaches to create a network that is both highly clustered and with short paths (CPL ~ O(log(n)))? ​</li>
+<li>Look at the literature for mathematical expressions that show the transitivity or average clustering coefficient as a function of n, <span class="math inline">\(\bar{k}\)</span>, and p for the Watts-Strogatz model. Similarly, look for mathematical expressions for the average path length or diameter. ​</li>
+<li>In Lesson-4, we briefly reviewed the preferential attachment model, which is able to produce power-law networks. How would you combine the Watts-Strogatz model with the Preferential Attachment model so that you get:</li>
+</ol>
+<ul>
+<li>Strong clustering</li>
+<li>Short paths</li>
+<li>Power-law degree distribution</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="clustering-in-pa-model" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-in-pa-model">Clustering in PA Model</h3>
+<p>Lesson-4 described the Preferential Attachment (PA) model and we saw that it generates networks with a power-law degree distribution (with exponent=3). Are those networks also <strong>small-world</strong>, the way we have defined this property in this Lesson?</p>
+<p><img src="assets/L5_clustering_pa1.jpeg" class="img-fluid"></p>
+<p>The plot at the top shows the average clustering coefficient for networks of increasing size (the number of nodes is shown here as N). The networks are generated with the PA model, with m=2 links for every new node. Note that the clustering coefficient is significantly higher than that of random G(N,p) random graphs of the same size and density (p=m/(N-1)). It turns out (even though we will not prove it here) that the average clustering coefficient of a PA network scales as <span class="math inline">\(\frac{({\ln{N}})^2}{N}\)</span> – this is much larger than the corresponding clustering coefficient in G(N,p), which is <span class="math inline">\(O(\frac{1}{N})\)</span>.</p>
+<p>However, this also means that the clustering coefficient of PA networks decreases with the network size N. This is not what we have seen in practice (see figure at the below). In most real-world networks, the clustering coefficient does not reduce significantly at least as the network grows. Thus, even though the PA model produces significant clustering relative to random networks, it does not produce the clustering structure we see in real-world networks.</p>
+<p><img src="assets/L5_clustering_pa2.jpeg" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Can you derive the mathematical expression we give here for the clustering coefficient of PA networks?</p>
+</blockquote>
+</section>
+<section id="length-of-shortest-paths-in-pa-model" class="level3">
+<h3 class="anchored" data-anchor-id="length-of-shortest-paths-in-pa-model">Length of Shortest Paths in PA Model</h3>
+<p><img src="assets/L5_shortest_pa.jpeg" class="img-fluid"></p>
+<p>How about the length of the shortest paths in PA networks? How does their CPL scale with the network size N?</p>
+<p>It turns out that the CPL in PA networks scales even slower than in G(n,p) random graphs. In particular, an approximate expression for the CPL in PA networks is <span class="math inline">\(O(\frac{\ln{N}}{\ln{\ln{N}}})\)</span>, which has sub-logarithmic growth. This is shown with simulation results in the plot, where the PA networks were generated using m=2.</p>
+<p>To summarize, the PA model generates networks with a power-law degree distribution (exponent=3), a clustering coefficient that decreases with network size as <span class="math inline">\(\frac{({\ln{N}})^2}{N}\)</span>, and a CPL that increases sub-logarithmically as <span class="math inline">\(O(\frac{\ln{N}}{\ln{\ln{N}}})\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Look at the literature for a derivation of the previous formula for the CPL of PA networks.</p>
+</blockquote>
+</section>
+<section id="path-lengths-in-power-law-networks" class="level3">
+<h3 class="anchored" data-anchor-id="path-lengths-in-power-law-networks">Path Lengths in Power-law Networks</h3>
+<p><img src="assets/L5_path_lengths.jpeg" class="img-fluid"></p>
+<p>What about power-law networks with other exponent values? How does the CPL of those networks scale with network size?</p>
+<p>As we saw in the previous page, when the exponent (shown as <span class="math inline">\(\gamma\)</span> in this plot) is equal to 3, we get the <span class="math inline">\(O(\frac{\ln{N}}{\ln{\ln{N}}})\)</span> expression of PA networks.</p>
+<p>The value <span class="math inline">\(\gamma=3\)</span> is critical because the variance of the degree distribution becomes well-defined when <span class="math inline">\(\gamma &gt; 3\)</span>. In that case the power-law networks do not differ from G(N,p) random graphs in terms of their CPL – the average shortest path length increases as <span class="math inline">\(O(\ln{N})\)</span>.</p>
+<p>For <span class="math inline">\(\gamma\)</span> values between 2 and 3 (i.e., the mean is finite but the variance of the degree distribution diverges), the CPL scales even slower, following a double-log pattern: <span class="math inline">\(O(\ln{\ln{N}})\)</span>. These networks are sometimes referred to as <strong>ultra-small world</strong> networks.</p>
+<p>The plots at the lower part of the visualization show shortest-path length distributions for three different exponent values as well as for a corresponding G(N,p) random graph. As you see, the differences between all these networks are minor when the network is only a few hundreds of nodes. For networks with millions of nodes, however, we see a major difference in the resulting path length distributions, showing clearly the major effect of the degree distribution exponent as well as the critical value of <span class="math inline">\(\gamma=3\)</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Look at the literature for a derivation of the previous formula for the CPL of networks when <span class="math inline">\(\gamma\)</span> is between 2 and 3.</p>
+</blockquote>
+</section>
+<section id="directed-subgraph-connectivity-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="directed-subgraph-connectivity-patterns">Directed Subgraph Connectivity Patterns</h3>
+<p><img src="assets/L5_directed_subraph.png" class="img-fluid"></p>
+<p>So far, we have primarily focused on clustering in undirected networks. Such <strong>undirected clustering</strong> manifests through the presence of triangles of connected nodes. What about directed networks, however?</p>
+<p>In that case, we can have various <strong>types</strong> of connected triplets of nodes. The upper part of the visualization shows the 13 different types of connection patterns between three weakly connected network nodes.</p>
+<p>Note that each of the 13 patterns is distinct when we consider the directionality of the edges. Also, if you are not convinced that these are the only 13 possible patterns you can try to find any additional patterns (hint: you will not be able to!).</p>
+<p><img src="assets/L5_directed_subraph.png" class="img-fluid"></p>
+<p>Each of these patterns is also given a name (e.g., FeedForward Loop or FFL). Instead of using the word “pattern”, we will be referring to such small subgraph types as network motifs.</p>
+<p>A specific network motif (e.g., FFL) may occur in a network just based on chance. How can we check if that motif occurs much more frequently than that? What does it mean when a specific network motif occurs very frequently? Or the opposite, what does it mean when a network motif occurs much less frequently than expected based on chance? We will answer these questions next.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Given that we know that there are 13 motifs between 3 weakly connected nodes, how many network motifs exist between 4 weakly connected nodes?</p>
+</blockquote>
+</section>
+<section id="statistical-test-for-the-frequency-of-a-network-motif" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-test-for-the-frequency-of-a-network-motif">Statistical Test For The Frequency of a Network Motif</h3>
+<p><img src="assets/L5_statistical_test.jpeg" class="img-fluid"></p>
+<p>Suppose we are given the 16-node network G at the left, and we want to examine if the FFL network motif (shown at the bottom left) appears <strong>too frequently</strong>. How would we answer this question?</p>
+<p>First, we need to count how many distinct instances of the FFL motif appear in G. One way to do so is to go through each node u that has at least two outgoing edges. For all distinct pairs of nodes v and w that u connects to uni-directionally, we then check whether v and w are also connected with a uni-directional edge. If that is the case (u,v,w) is an FFL instance. Suppose that the count of all FFL instances in the network G is m(G).</p>
+<p>We then ask: how many times would the FFL motif take place in a randomly generated network <span class="math inline">\(G_r\)</span> that:</p>
+<ol type="1">
+<li>has the same number of nodes with G, and</li>
+<li>each node u in <span class="math inline">\(G_r\)</span> has the same in-degree and out-degree with the corresponding node u in G?</li>
+</ol>
+<p>One way to create <span class="math inline">\(G_r\)</span> is to start from G and then <strong>randomly rewire</strong> it as follows:</p>
+<ul>
+<li>Pick a random pair of edges of (u,v) and (w,z)</li>
+<li>Rewire them to form two new edges (u,z) and (w,v)</li>
+<li>Repeat the previous two steps a large number of times relative to the number of edges in G.</li>
+</ul>
+<p>Note that the previous rewiring process generates a network <span class="math inline">\(G_r\)</span> that preserves the in-degree and out-degree of every node in G. We can now count the number of FFL instances in <span class="math inline">\(G_r\)</span> – let us call this count <span class="math inline">\(m(G_r)\)</span>.</p>
+<p>The previous process can be repeated for many randomly rewired networks <span class="math inline">\(G_r\)</span> (say 1000 of them). This will give us an ensemble of networks <span class="math inline">\(G_r\)</span>. We can use the counts <span class="math inline">\(m(G_r)\)</span> to form an empirical distribution of the number of FFL instances that would be expected by chance in networks that have the same number of nodes and the same in-degree and out-degree sequences as G.</p>
+<p>We can then compare the count <span class="math inline">\(m(G)\)</span> of the given network with the previous empirical distribution to estimate the probability with which the random variable <span class="math inline">\(m(G_r)\)</span> is larger than <span class="math inline">\(m(G)\)</span> in the ensemble of randomized networks. If that probability is very small (say less than 1%) we can have a 99% statistical confidence that the FFL motif is much more common in G than expected by chance.</p>
+<p>Similarly, if the probability with which the random variable <span class="math inline">\(m(G_r)\)</span> is smaller than <span class="math inline">\(m(G)\)</span> is less than 1%, we can have 99% confidence that the FFL motif is much less common in G than expected by chance. The magnitude of <span class="math inline">\(m(G)\)</span> relative to the average plus (or minus) a standard deviation of the distribution <span class="math inline">\(m(G_r)\)</span> is also useful in quantifying how common a network motif is.</p>
+<p>The method we described here is only a special case of the general <strong>bootstrapping</strong> method in statistics.</p>
+</section>
+<section id="frequent-motifs-and-their-function" class="level3">
+<h3 class="anchored" data-anchor-id="frequent-motifs-and-their-function">Frequent Motifs and Their Function</h3>
+<p><img src="assets/L5_motifs.png" class="img-fluid"></p>
+<p>Most real-world networks are either designed by humans (<em>such as electronic circuits or communication networks</em>) or they evolve naturally (such as biological or social networks) to perform certain functions.</p>
+<p>Consequently, the frequent presence of a network motif in a network suggests that that specific connectivity pattern has a functional role in the network. For example, the frequent presence of the Feedback Loop motif (see FBL motif in previous pages) suggests that the network includes control loops that regulate the function of a three-node network path with feedback from the output node back to the input node.</p>
+<p>Similarly, the absence of a network motif from a network suggests that that connectivity pattern is functionally “not allowed” in that kind of network. For example, a hierarchical network that shows who is reporting to whom at a company should not contain any motifs that include a directed cycle.</p>
+<p>The research paper that we refer to in this page has analyzed a large variety of networks (gene regulatory networks, neuronal networks, food webs in ecology, electronic circuits, the WWW, etc) and identified the network motifs that are most frequently seen in each type of network. Their study did not consider only 3-node motifs but also larger motifs. For each type of network, the authors identify a few common network motifs and associated a plausible function for that motif.</p>
+<p>For instance, in gene regulatory networks the FeedForward Loop (FFL) motif is a prevailing structure.</p>
+<p>In that context, an FFL instance consists of three genes (X,Y,Z): two input transcription factors (X and Y), one of which regulates the other (<span class="math inline">\(X\rightarrow Y\)</span>), both jointly regulating a target gene Z. The FFL has eight possible structural types, because each of the three interactions in the FFL can be activating or repressing. Four of the FFL types, termed incoherent FFLs, act as sign-sensitive accelerators: they speed up the response time of the target gene expression following stimulus steps in one direction (e.g., off to on) but not in the other direction (on to off). The other four types, coherent FFLs, act as sign-sensitive delays. For additional information about the biological function of the FFL motif, please see the following research paper:</p>
+<p><a href="https://www.pnas.org/doi/full/10.1073/pnas.2133841100">Structure and function of the feed-forward loop network motif, S. Mangan and U. Alon, PNAS October 14, 2003 100 (21) 11980-11985</a></p>
+<p><img src="assets/L5_motifs1.png" class="img-fluid"></p>
+<p>In food webs, on the other hand, we rarely see the FFL motif. The reason is that if a carnivore species X eats a herbivore species Y, and Y eats a plant species Z, we rarely see that X also eats Z.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dnouri3\.github\.io\/gt-network-science-notes\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecture-4.html" class="pagination-link" aria-label="Lecture 4">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lecture 4</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecture-6.html" class="pagination-link" aria-label="Lecture 6">
+        <span class="nav-page-text">Lecture 6</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

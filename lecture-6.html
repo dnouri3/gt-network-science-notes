@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>gt-nsci-l6 – GT Network Science Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecture-7.html" rel="next">
+<link href="./lecture-5.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-49a824ff064150fa59632921ab93e189.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f503c0b15d9f8f334cec1fc4b8652841.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-54f67416df7f62e5f91c855543863998.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  </head><body class="nav-sidebar floating quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>true
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="default_style.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture-6.html">Lecture 6</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Science - CS 7280 OMSCS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quick-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quick Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 4</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 7</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 9</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 11</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 13</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 14</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contents" id="toc-contents" class="nav-link active" data-scroll-target="#contents">Contents</a></li>
+  <li><a href="#l6-centrality-metrics" id="toc-l6-centrality-metrics" class="nav-link" data-scroll-target="#l6-centrality-metrics">L6: Centrality Metrics</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#degree-eigenvector-and-the-katz-centrality" id="toc-degree-eigenvector-and-the-katz-centrality" class="nav-link" data-scroll-target="#degree-eigenvector-and-the-katz-centrality">Degree, Eigenvector and The Katz Centrality</a></li>
+  <li><a href="#pagerank-centrality" id="toc-pagerank-centrality" class="nav-link" data-scroll-target="#pagerank-centrality">PageRank Centrality</a></li>
+  <li><a href="#closeness-centrality-and-harmonic-centrality" id="toc-closeness-centrality-and-harmonic-centrality" class="nav-link" data-scroll-target="#closeness-centrality-and-harmonic-centrality">Closeness Centrality and Harmonic Centrality</a></li>
+  <li><a href="#betweenness-centrality-variants" id="toc-betweenness-centrality-variants" class="nav-link" data-scroll-target="#betweenness-centrality-variants">Betweenness Centrality Variants</a></li>
+  <li><a href="#path-centrality-for-directed-acyclic-graphs" id="toc-path-centrality-for-directed-acyclic-graphs" class="nav-link" data-scroll-target="#path-centrality-for-directed-acyclic-graphs">Path Centrality For Directed Acyclic Graphs</a></li>
+  <li><a href="#the-notion-of-node-importance" id="toc-the-notion-of-node-importance" class="nav-link" data-scroll-target="#the-notion-of-node-importance">The Notion of “Node Importance”</a></li>
+  <li><a href="#k-core-decomposition" id="toc-k-core-decomposition" class="nav-link" data-scroll-target="#k-core-decomposition">k-core Decomposition</a></li>
+  <li><a href="#core-periphery-structure" id="toc-core-periphery-structure" class="nav-link" data-scroll-target="#core-periphery-structure">Core-Periphery Structure</a></li>
+  <li><a href="#rich-club-set-of-nodes" id="toc-rich-club-set-of-nodes" class="nav-link" data-scroll-target="#rich-club-set-of-nodes">Rich-Club Set of Nodes​</a></li>
+  <li><a href="#core-set-of-nodes-in-dags" id="toc-core-set-of-nodes-in-dags" class="nav-link" data-scroll-target="#core-set-of-nodes-in-dags">Core Set of Nodes​ in DAGs</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#lesson-summary" id="toc-lesson-summary" class="nav-link" data-scroll-target="#lesson-summary">Lesson Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<hr>
+<div class="lecture-nav">
+<p><a href="./lecture-5.html" class="nav-prev">← Lecture 5</a> <a href="./lecture-7.html" class="nav-next">Lecture 7 →</a></p>
+</div>
+<section id="contents" class="level2">
+<h2 class="anchored" data-anchor-id="contents">Contents</h2>
+<ul>
+<li><a href="#l6-centrality-metrics">L6: Centrality Metrics</a>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#degree-eigenvector-and-the-katz-centrality">Degree, Eigenvector &amp; Katz</a></li>
+<li><a href="#pagerank-centrality">PageRank Centrality</a></li>
+<li><a href="#closeness-centrality-and-harmonic-centrality">Closeness &amp; Harmonic Centrality</a></li>
+<li><a href="#betweenness-centrality-variants">Betweenness Variants</a></li>
+<li><a href="#path-centrality-for-directed-acyclic-graphs">Path Centrality in DAGs</a></li>
+<li><a href="#core-periphery-structure">Core-Periphery Structure</a></li>
+<li><a href="#applications">Applications</a></li>
+<li><a href="#lesson-summary">Lesson Summary</a></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="l6-centrality-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="l6-centrality-metrics">L6: Centrality Metrics</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Readings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Required Reading</strong></p>
+<ul>
+<li>Chapter 7 (mostly sections 7.1-7.8) - M.E.J.Newman, <a href="https://www.amazon.com/Networks-Mark-Newman/dp/0198805098">Networks: An Introduction</a>., Oxford University press.
+<ul>
+<li><a href="https://math.bme.hu/~gabor/oktatas/SztoM/Newman_Networks.pdf">Alternative link to text</a></li>
+</ul></li>
+<li>Section 14.3 - D. Easley and J. Kleinberg, <a href="https://www.cambridge.org/core/books/networks-crowds-and-markets/A70C7855A3003FE1079C25F8397AF641">Networks, Crowds and Markets</a> , Cambridge Univ Press, 2010 (also available <a href="https://www.cs.cornell.edu/home/kleinber/networks-book/networks-book.pdf">online</a>)</li>
+<li><a href="https://gatech.instructure.com/courses/336054/files/41680931/download?wrap=1">“Rich-clubness test: how to determine whether a complex network has or doesn’t have a rich-club?”</a> By Alessandro Muscoloni and Carlo Vittorio Cannistraci</li>
+</ul>
+<p><strong>Recommended Reading</strong></p>
+<ul>
+<li>Sabrin, K, Dovrolis, C. <a href="https://www.cambridge.org/core/journals/network-science/article/hourglass-effect-in-hierarchical-dependency-networks/DDBCA83D16CA74B827DAB66A98CC906A">The Hourglass Effect in Hierarchical Dependency Networks</a>, Journal of Network Science, (2017)</li>
+<li>Faskowitz, J., Yan, X., Zuo, X. et al.&nbsp;<a href="https://www.nature.com/articles/s41598-018-31202-1">Weighted Stochastic Block Models of the Human Connectome across the Life Span</a>. Sci Rep 8, 12997 (2018).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="degree-eigenvector-and-the-katz-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="degree-eigenvector-and-the-katz-centrality">Degree, Eigenvector and The Katz Centrality</h3>
+<section id="degree-and-strength-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="degree-and-strength-centrality">Degree and Strength Centrality</h4>
+<p><img src="assets/L6_DE1.png" class="img-fluid"></p>
+<p>The simplest way to define the importance of a network node is based on its number of connections – the more connections a node has, the more important it is. So, the degree centrality of a node is simply the degree of that node.</p>
+<p>For weighted networks, the corresponding metric is the sum of the weights of all edges of that node, i.e., the <strong>strength</strong> of that node.</p>
+<p>One problem with this definition of centrality however is that it only captures the “local role” of a node in the network. A node may have many connections within an isolated cluster of nodes that are completely disconnected from the rest of the network. On the other hand, an important node may have only a few direct connections but it can be the only node between two large groups of nodes that are otherwise disconnected.</p>
+<p>Another issue with this centrality metric is that it is easy to manipulate locally. Back in the early days of the Web, some search engines used to rank results based on degree centrality (<em>how many other Web pages point to that page</em>). Some online firms quickly exploited that vulnerability: they would create 1000s of links from fake web pages so that they boost the centrality/rank of their sponsored web sites.</p>
+<hr>
+</section>
+<section id="eigenvector-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="eigenvector-centrality">Eigenvector Centrality</h4>
+<p><img src="assets/L6_DE2.png" class="img-fluid"></p>
+<p>A better centrality metric is to consider not only the number of neighbors of a node – but also the centrality of those neighbors. So the basic idea is that a node is more central when its neighbors are also more central. Suppose that we are given an undirected network with adjacency matrix A. Let <span class="math inline">\(v_i\)</span> be the centrality of node i. We can then define that:</p>
+<p><span class="math display">\[
+v_i = \frac{1}{\lambda} \sum_j A_{i,j} \, v_j
+\]</span></p>
+<p>We can think of the term <span class="math inline">\(\frac{1}{\lambda}\)</span> as a normalization constant for now. Note that the centrality of a node is the (normalized) sum of the centralities of all its neighbors.</p>
+<p>The previous equation can be written in matrix form as:</p>
+<p><span class="math display">\[
+\lambda v = A \, v
+\]</span></p>
+<p>where <span class="math inline">\(v\)</span> is the vector all node centralities. This equation, however, is simply the eigenvector definition of matrix A: <span class="math inline">\(\lambda\)</span> is the corresponding eigenvalue for eigenvector <span class="math inline">\(v\)</span>. This is why we refer to this centrality metric as “eigenvector centrality”.</p>
+<p>We wish to have non-negative centralities. In other words, the eigenvector <span class="math inline">\(v\)</span> corresponding to eigenvalue <span class="math inline">\(\lambda\)</span> should consist of non-negative entries. It can be shown (using the Perron–Frobenius theorem) that using the largest eigenvalue of <span class="math inline">\(A\)</span> satisfies this requirement.</p>
+<hr>
+</section>
+<section id="the-katz-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="the-katz-centrality">The Katz Centrality</h4>
+<p><img src="assets/L6_DE3.png" class="img-fluid"></p>
+<p>The Katz centrality metric is a variation of eigenvector centrality that is more appropriate for directed networks.</p>
+<p>The eigenvector centrality may be zero even for nodes with non-zero in-degree and out-degree, and so Katz starts from the same equation as eigenvector centrality but it also assigns a small centrality <span class="math inline">\(\beta\)</span> to every node.</p>
+<p>So, the definition becomes:</p>
+<p><span class="math display">\[
+v_i = \beta + \frac{1}{\lambda} \sum_j A_{i,j} \, v_j
+\]</span></p>
+<p>where the summation is over all nodes j that connect with i.</p>
+<p>Given that we are only interested in the relative magnitude of the centrality values, we can arbitrarily assign <span class="math inline">\(\beta=1\)</span>.</p>
+<p>Then, we can rewrite the previous definition in matrix form:</p>
+<p><span class="math display">\[
+v = (I - \frac{1}{\lambda} A)^{-1} . {\bf 1}
+\]</span></p>
+<p>Where <span class="math inline">\({\bf 1}\)</span> is a n-by-1 vector of all ones.</p>
+<p>The value of <span class="math inline">\(\lambda\)</span> controls the relative magnitude between the constant centrality <span class="math inline">\(\beta\)</span> we assign to each node and the centrality that each node derives from its neighbors. If <span class="math inline">\(\lambda\)</span> is very large, then the former term dominates and all nodes have roughly the same centrality. If <span class="math inline">\(\lambda\)</span> is too small, on the other hand, the Katz centralities may diverge. This is the case when the determinant of the matrix <span class="math inline">\((I - \frac{1}{\lambda} A)\)</span> is zero, which happens when <span class="math inline">\(\lambda\)</span> is equal to an eigenvalue of <span class="math inline">\(A\)</span>. To avoid this divergence, the value of <span class="math inline">\(\lambda\)</span> is typically constrained to be larger than the maximum eigenvalue of <span class="math inline">\(A\)</span>.</p>
+<p>Note that the Katz centrality values given in the figure are normalized by the L2-norm of the centrality vector.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Derive the matrix-form equation of Katz centrality from the initial definition.</p>
+</blockquote>
+</section>
+</section>
+<section id="pagerank-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="pagerank-centrality">PageRank Centrality</h3>
+<p><img src="assets/L6_pagerank.png" class="img-fluid"></p>
+<p>PageRank, created by the co-founder of Google, Larry Page, is a famous centrality metric because it was the main algorithm that made Google the most successful search engine back in the late 1990s.</p>
+<p>PageRank, created by the co-founder of Google, Larry Page, is a famous centrality metric because it was the main algorithm that made Google the most successful search engine back in the late 1990s.</p>
+<p>In fact, PageRank is only a slight modification of the Katz centrality metric. It is based on the following idea: if a node j points to a node i (and thus <span class="math inline">\(A_{i,j} =1\)</span>), and node <span class="math inline">\(j\)</span> has <span class="math inline">\(k_{j,\text{out}}\)</span> outgoing connections, then the centrality of node j should be ”split” among those <span class="math inline">\(k_{j,\text{out}}\)</span> neighbors. In other words, the “wealth” of node j should not be just inherited by all nodes it points to – but rather, the “wealth” of node j should be split among those nodes.</p>
+<p>So, the defining equation of PageRank centrality becomes:</p>
+<p><span class="math display">\[
+v_i = \beta + \frac{1}{\lambda} \sum_j A_{i,j} \, \frac{v_j}{k_{j,out}}
+\]</span></p>
+<p>where the summation is over all nodes j that point to i (and thus, <span class="math inline">\(k_{j,\text{out}}\)</span> is non-zero).</p>
+<p>Please contrast this equation with the definition of Katz centrality.</p>
+<p>In matrix form, similar to Katz centrality, the previous definition becomes (when <span class="math inline">\(\beta=1\)</span>):</p>
+<p><span class="math display">\[
+v = (I - \frac{1}{\lambda} A \, D)^{-1} . {\bf 1}
+\]</span></p>
+<p>where <strong>D</strong> is a diagonal n-by-n matrix in which the j’th element is <span class="math inline">\(\frac{1}{k_{j,\text{out}}}\)</span> if <span class="math inline">\(k_{j,\text{out}}\)</span> is non-zero (the diagonal elements for which <span class="math inline">\(k_{j,\text{out}}=0\)</span> simply do not matter).</p>
+<p>Undirected networks are typically transformed to directed networks by replacing each undirected edge with two directed edges.</p>
+<p>In practice, the computation of both Katz and PageRank centralities is performed numerically, using a power-iteration method that iterates the computation of the centrality values until those values converge. Typical values for <span class="math inline">\(\frac{1}{\lambda}\)</span> and <span class="math inline">\(\beta\)</span> are 0.85 and <span class="math inline">\((1-\frac{1}{\lambda})/n\)</span>, respectively – but as in the case of Katz centrality, it is theoretically possible that the PageRank centrality computation does not converge if <span class="math inline">\(\lambda\)</span> is too low.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Recall the concept of random walks on networks, that we introduced in Lesson-2. How can you interpret the PageRank centrality equation based on random walks?</p>
+</blockquote>
+</section>
+<section id="closeness-centrality-and-harmonic-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="closeness-centrality-and-harmonic-centrality">Closeness Centrality and Harmonic Centrality</h3>
+<section id="closeness-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="closeness-centrality">Closeness Centrality</h4>
+<p><img src="assets/L6_closeness.png" class="img-fluid"></p>
+<p>The previous centrality metrics are all based on the direct connections of a node. Another group of centrality metrics focuses on network paths. Paths represent ”routes” over which something is transferred through a network (e.g., information, pathogens, materials). Consequently, another way to think about the centrality of a node is based on how good the routes are of that node to the rest of the network (or how many are the routes that traverse a node).</p>
+<p>A commonly used path-based metric is closeness centrality. It is based on the length (number of hops) of the shortest-path between a node i and a node j, denoted by <span class="math inline">\(d_{i,j}\)</span>. The closeness centrality of node i is defined as the inverse of the average shortest path length <span class="math inline">\(d_{i,j}\)</span>, across all nodes j that i connects to:</p>
+<p><span class="math display">\[
+v_i = \frac{n-1}{\sum_j d_{i,j}}
+\]</span></p>
+<p>where j is any node in the same connected component with i, and n is the number of nodes in that connected component (including i). If the network is directed, then we typically focus on shortest-paths from any node j to node i (i.e., incoming paths to i). The range of closeness centrality values is limited between 0 and 1.</p>
+<p>The closeness centrality has some shortcomings, including the fact that it does not consider all network nodes – only nodes that are in the same connected component with i. So an isolated cluster of nodes can have high closeness centrality values (close to 1) even though those nodes are not even connected to most other nodes.</p>
+<hr>
+</section>
+<section id="harmonic-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="harmonic-centrality">Harmonic Centrality</h4>
+<p><img src="assets/L6_closeness2.png" class="img-fluid"></p>
+<p>An improved metric is harmonic centrality, defined as:</p>
+<p><span class="math display">\[
+v_i = \sum_{j\neq i} \frac{1}{d_{i,j}}
+\]</span></p>
+<p>Here, if nodes i and j cannot reach other, the corresponding distance can be thought of as infinite, and thus the term <span class="math inline">\(\frac{1}{d_{i.j}}\)</span> is <span class="math inline">\(0\)</span>. Sometimes, the harmonic centrality is normalized by <span class="math inline">\(\frac{1}{n-1}\)</span> – but that does not affect the relative ordering of node centralities.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Can you think of some network analysis applications where it would make more sense to use the closeness centrality (or harmonic centrality) metric instead of the eigenvector/Katz/PageRank metrics? What about the opposite?</p>
+</blockquote>
+</section>
+</section>
+<section id="betweenness-centrality-variants" class="level3">
+<h3 class="anchored" data-anchor-id="betweenness-centrality-variants">Betweenness Centrality Variants</h3>
+<section id="shortest-path-betweenness-centrality" class="level4">
+<h4 class="anchored" data-anchor-id="shortest-path-betweenness-centrality">Shortest-path Betweenness Centrality</h4>
+<p><img src="assets/L6_between.png" class="img-fluid"></p>
+<p>In some network analysis applications, the importance of a node is associated with how many paths go through a node: the more routes go through a node, the more central that node is.</p>
+<p>The most common instance of this metric is the “shortest-path betweenness centrality”. Consider any two nodes s (source) and t (target) in the same connected component, and let us define that the number of shortest-paths between these two nodes is <span class="math inline">\(n_{s,t}\)</span>. Also, suppose that the subset of these paths that traverses node i is <span class="math inline">\(n_{s,t}(i)\)</span>, where node i is different than s and t.</p>
+<p>The (shortest-path) betweenness centrality of node i is defined as:</p>
+<p><span class="math display">\[
+v_i = \sum_{s,t \neq i} \frac{n_{s,t}(i)}{n_{s,t}}
+\]</span></p>
+<p>If s and t are the same, we define that <span class="math inline">\(n_{s,t}=1\)</span>.</p>
+<p>The previous metric is often normalized by its maximum possible value (which is <span class="math inline">\((n-1)(n-2)\)</span>, for a star network with n nodes) so that the centrality values are between 0 and 1. This is not necessary however given that we only care about the relative magnitude of centralities.</p>
+<p>Note that node E, in the visualization, has higher betweenness centrality than node C – even though the two nodes have the same closeness centrality (and node C has higher eigenvector centrality than node E). The reason is that node E is the only <strong>“bridge”</strong> between nodes F and G and the rest of the network.</p>
+<p>For weighted networks, where the (non-negative) weight represents the cost of an edge, the shortest-paths can be computed using Dijkstra’s algorithm for weighted networks.</p>
+<p>There are many variants of the betweenness centrality metric, depending on what kind of paths we use. One such variant is the <strong>flow betweenness centrality</strong> in which we compute the max-flow from any source node s to any target node t – and then replace the fraction <span class="math inline">\(\frac{n_{s,t}(i)}{n_{s,t}}\)</span> with the fraction of the max-flow that traverses node i – see Lesson-2 if you do not remember the definition of max-flow.</p>
+<p>Yet another variant is the <strong>random-walk betweenness centrality</strong>, which considers the number of random walks from node-s to node-t that traverse node-i.</p>
+<hr>
+</section>
+<section id="edge-centrality-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="edge-centrality-metrics">Edge Centrality Metrics</h4>
+<p><img src="assets/L6_between1.png" class="img-fluid"></p>
+<p>In some cases, we are interested in the centrality of edges, rather than nodes. For example, suppose you are given a communication network and you want to rank links based on how many routes they carry.</p>
+<p>One such metric is the edge betweenness centrality. The definition is the same as for node betweenness centrality – but instead of considering the fraction of paths that traverse a node i, we consider the fraction of that traverse an edge (i,j). These paths can be shortest-paths or any other well-defined set of paths, as we discussed on the previous page.</p>
+<p>Another way to define the centrality of an edge is to quantify the impact of its removal. For instance, one could measure the increase in the <a href="https://gatech.instructure.com/courses/336054/pages/l5-diameter-characteristic-path-length-and-network-efficiency">Characteristic Path Length</a> (CPL, see Lesson-5) after removing edge (i,j) – the higher that CPL increase is, the more important that edge is for the network.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>An interesting question is how to compute the shortest-path betweenness centrality metric efficiently. We recommend you review the following paper for an efficient algorithm:</p>
+<p><a href="https://doi.org/10.1080/0022250X.2001.9990249">Ulrik Brandes: A Faster Algorithm for Betweenness Centrality. Journal of Mathematical Sociology 25(2):163-177, 2001</a></p>
+</blockquote>
+</section>
+</section>
+<section id="path-centrality-for-directed-acyclic-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="path-centrality-for-directed-acyclic-graphs">Path Centrality For Directed Acyclic Graphs</h3>
+<p><img src="assets/L6_path_centrality.jpeg" class="img-fluid"></p>
+<p>In directed acyclic graphs (DAGs), we can consider all paths from the set of sources to the set of targets. The visualization above shows a DAG with three sources (orange nodes) and four targets (blue nodes). Each source-target path (ST-path) represents one “<strong>dependency chain</strong>” through which that target depends on the corresponding source.</p>
+<p>The path centrality of a node (including sources or targets) is defined as the total number of source-target paths that traverse that node.</p>
+<p>It can be easily shown that the path centrality of node-i is the product of the number of paths from all sources to node-i, times the number of paths from node-i to all targets. The former term can be thought of as the <strong>“complexity”</strong> of node-i, while the second term can be thought of as the <strong>“generality”</strong> of node-i.</p>
+</section>
+<section id="the-notion-of-node-importance" class="level3">
+<h3 class="anchored" data-anchor-id="the-notion-of-node-importance">The Notion of “Node Importance”</h3>
+<p>Now that we have defined a number of centrality metrics, the obvious question is: which metric should we use for each network analysis application?</p>
+<p>To choose the right metric, it is important to understand the notion of <strong>“node importance”</strong> that each of these centrality metrics focuses on.</p>
+<ul>
+<li><strong>Degree (or strength) centrality</strong>: these metrics are more appropriate when we are interested in the number or weight of direct connections of each node. For example, suppose that you try to find the person with most friends in a social network.</li>
+<li><strong>Eigenvector/Katz/PageRank centrality</strong>: these metrics are more appropriate when we are mostly interested in the number of connections with other well-connected nodes. For example, suppose that you analyze a citation network and you try to identify research papers that are not just cited many times – but they are cited many times by other well-cited papers. For undirected networks, it is better to use Eigenvector centrality because it does not depend on any parameters. For directed networks, use Katz or PageRank depending on whether it makes sense to split the centrality of a node among its outgoing connections. For instance, this splitting may make sense in the case of Web pages but it may not make sense in the case of citation networks.</li>
+<li><strong>Closeness (or harmonic) centrality</strong>: these metrics are more appropriate when we are interested in how fast a node can reach every other node. For example, in an epidemic network, the person with the highest closeness centrality is expected to cause a larger outbreak than a person with very low closeness centrality. If the network includes multiple connected components, it is better to use harmonic centrality.</li>
+<li><strong>Betweenness centrality metrics</strong>: these metrics are more appropriate in problems that involve some form of transfer through a network, and the importance of a node relates to whether that node is in the route of such transfers. For example, consider a data communication network in which you want to identify the most central router. You should use a betweenness centrality that captures correctly the type of routes used in that network. For instance, if the network uses shortest-path routes, it makes sense to use shortest-path betweenness centrality. If however, the network uses equally all possible routes between each pair of nodes, the path centrality may be a more appropriate metric.</li>
+</ul>
+</section>
+<section id="k-core-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="k-core-decomposition">k-core Decomposition</h3>
+<p>In some applications of network analysis, instead of trying to rank individual nodes in terms of centrality, we are interested in identifying the most important group of nodes in the network. There are different ways to think about the importance of groups of nodes. One of them is based on the notion of k-core:</p>
+<p>A k-core (or “core of order-k”) is a maximal subset of nodes such that each node in that subset is connected to at least k others in that subset.</p>
+<p>Note that, based on the previous definition, a node in the k-core also belongs to all lower cores, i.e., to any k’-core with <span class="math inline">\(k'&lt;k\)</span>.</p>
+<p><img src="assets/L6_k_core.png" class="img-fluid"> <em>(Image from research paper: <a href="https://dl.acm.org/doi/abs/10.1145/3341161.3342866">Perturb and combine to identify influential spreaders in real-world networks</a>,AJP Tixier, MEG Rossi, FD Malliaros, J Read )</em></p>
+<p>The visualization shows a network in which the red nodes belong to a core of order-3 (the highest order in this example), the green and red nodes form a core of order-2, while all nodes (except the black) form a core of order-1.</p>
+<p>Note that there is a purple node with degree=5 – but its highest order is 1 because all its connections except one are to nodes of degree-1. Similarly, there are green nodes of degree-3 that are in the 2-core set.</p>
+<p>A simple algorithm, known as “<strong>k-core decomposition</strong>”, can associate each node with the highest k-core order that that node belongs to. The algorithm proceeds iteratively by removing all nodes of degree k, for k=0, 1, 2, … During the iteration that the algorithm removes nodes of degree k, some higher-degree nodes may lose connections and become of degree-k. Those nodes would also be removed, joining the k-core until no further nodes can be removed in that iteration. The algorithm terminates when all nodes have been removed. Note that the maximum-order core set may not form a connected component.</p>
+<p>One way to think about k-cores is as the successive layers of an onion, where k=1 corresponds to the external layer of the onion, while the highest value of k corresponds to the “heart” of the onion. Using this metaphor, the k-core decomposition process gradually peels off the network layer by layer until it reaches its most internal group of nodes.</p>
+<p>The nodes in the maximum core order are considered as the most well-connected group of nodes in the network. Additionally, the k-core decomposition process is useful by itself because it allows us to assign a layer to each node, with nodes of lower order (lower values of k) considered as peripheral, and nodes of higher-order as more central in the overall network.</p>
+<p>A related concept is:</p>
+<p>The <strong>k-shell</strong> is the subgraph induced by nodes in the k-core that are not in the (k+1)-core. For example, the green nodes in the visualization form the 2-shell.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>We claim that the k-core decomposition approach can rank nodes in terms of importance, and that the highest-order core consists of the most important nodes. Can you come up with an example in which this claim is probably true – and maybe another example in which it is not?</p>
+</blockquote>
+</section>
+<section id="core-periphery-structure" class="level3">
+<h3 class="anchored" data-anchor-id="core-periphery-structure">Core-Periphery Structure</h3>
+<p>Another related concept is that some networks have a core-periphery structure. Intuitively this means that the nodes of such networks can be partitioned into two groups, the core nodes and the periphery nodes.</p>
+<p>The core nodes are very densely connected to each other, and the rest of the network.</p>
+<p>Periphery nodes are well connected only to core nodes - not to other periphery networks.</p>
+<p><img src="assets/L6_core_ph.png" class="img-fluid"></p>
+<p>The visualization here contrasts it’s synthetically generated core periphery network, with a random generated network of the same number of nodes and edges. The core nodes appear in red, and they are about 25% of all nodes. The block model matrix at the right, shows the probability that the core node connects to another core node is 75%.</p>
+<p>The probability that a core node connects to the periphery node is 33% and the probability that two periphery node connects to each other is only 10%. There are several algorithms in the literature that try to detect first, whether a network has a core periphery structure, and if so, to identify the set of core nodes.</p>
+<p>It is important to do so for an arbitrary number of nodes in the core set and to establish the statistical significance of the detected core using an appropriate null model, meaning an ensemble of random networks that preserve the degree distribution and potentially other characteristics of the original network.</p>
+<p>We will review a specific approach to detect if a network has a core periphery structure in the next page.</p>
+</section>
+<section id="rich-club-set-of-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="rich-club-set-of-nodes">Rich-Club Set of Nodes​</h3>
+<p>A common approach for the detection of core-periphery structure is referred to as the rich-club of a network.</p>
+<p>The metaphor behind this concept comes from social networks: the very rich people are few and they have a large number of acquaintances, which include the rest of those few very rich people. So those few very rich people form a highly clustered small group of nodes (the “rich-club”) that is also very well-connected with the rest of the network.</p>
+<p>To define this notion for general (but undirected) networks, suppose that the number of nodes with degree greater than <span class="math inline">\(k\)</span> is <span class="math inline">\(n_k\)</span>. Let <span class="math inline">\(e_k\)</span> be the number of edges between those nodes. The maximum number of possible edges between those nodes is <span class="math inline">\(\frac{n_k\,(n_k-1)}{2}\)</span>. The “rich-club coefficient” for degree k is defined as:</p>
+<p><span class="math display">\[
+\phi(k) = \frac{2\, e_k}{n_k\, (n_k-1)}
+\]</span></p>
+<p>and it quantifies the density of the connections between nodes of degree greater than k.</p>
+<p>How can we tell however whether the value of <span class="math inline">\(\phi(k)\)</span> is statistically significant for a given k? It could be that even randomly wired networks have about the same value of <span class="math inline">\(\phi(k)\)</span>, at least for some degree values. To do so, we also generate an ensemble of random networks with the same number of nodes and degree distribution (as we did in Lesson-4 for the detection of network motifs). These random networks represent our null model. We can then compute the average value of <span class="math inline">\(\phi(k)\)</span> for each k, averaging across all random networks.</p>
+<p>If the rich-club coefficient for degree k in the given network is much larger than the corresponding coefficient in the null model, we can mark that value of k as statistically significant for the existence of a rich-club. If there is at least one such statistically significant value of k, we conclude that the network includes a rich-club – the set of nodes with degree greater than k. If there are multiple such values of k, the rich-club nodes can be identified based on the value of k for which we have the largest difference between the rich-club coefficient in the real network versus the null model (even though there is some variation about this in the literature).</p>
+<p><img src="assets/L6_rich.jpeg" class="img-fluid"></p>
+<p>The visualization shows a synthetic network (left). The plot at the right shows the rich-club coefficient as a function of the degree k for the given network (red) as well as for the null model. The value of k for which we are most confident that a rich-club exists is k=19. There are five nodes with degree greater than 19 –they are shown (separately than the rest of the network) at the center of the visualization. Note that the corresponding rich-club coefficient is 1, which means that these five nodes form a clique. If we had chosen a higher value of k, the rich-club would only consist of a subset of these five nodes.</p>
+<blockquote class="blockquote">
+<p><strong>Food for Thought</strong></p>
+<p>Think about the similarities and differences between the following notions: 1. the rich-club set of nodes (if it exists) 2. the maximum order k-core group (this set of nodes always exists) 3. a group of nodes that can be described as hubs because their degree is higher than the average degree plus 3 standard deviations (they may or may not exist).</p>
+</blockquote>
+</section>
+<section id="core-set-of-nodes-in-dags" class="level3">
+<h3 class="anchored" data-anchor-id="core-set-of-nodes-in-dags">Core Set of Nodes​ in DAGs</h3>
+<p><img src="assets/L6_core.jpeg" class="img-fluid"></p>
+<p>A path-based approach to identify a group of core nodes in a network is referred to as the “<span class="math inline">\(\tau\)</span>-<strong>core</strong>”. ​</p>
+<p>We define that a node v “covers” a path p when v is traversed by p.&nbsp;​</p>
+<p>The <span class="math inline">\(\tau\)</span>-core is defined as follows: given a set of network paths P we are interested in, what is the minimal set of nodes that can cover at least a fraction 𝜏 of all paths in P?​</p>
+<p>In the context of DAGs, the set P can be the ST-paths from the set of all sources (orange nodes) to all targets (blue nodes). ​</p>
+<p>The rationale for covering only a fraction <span class="math inline">\(\tau\)</span>of paths (say 90%) instead of all paths is because in many real networks there are some ST-paths that do not traverse any intermediate nodes.​</p>
+<p>The problem of computing the the “<span class="math inline">\(\tau\)</span>-<strong>core</strong>” has been shown to be NP-Complete in the following paper. It can be approximated by a greedy heuristic that iteratively selects the node with the maximum number of remaining un-covered paths until the 𝜏 constraint is met.</p>
+<p>Sabrin, Kaeser M., and Constantine Dovrolis. “The hourglass effect in hierarchical dependency networks.” Network Science 5.4 (2017): 490-528.​</p>
+<p>The visualization shows the two core nodes (d and i) for the value of <span class="math inline">\(\tau\)</span>=80%. Note that there are three ST-paths (a-j, b-e-m and c-f-h-k) that are not covered by this core set.</p>
+</section>
+<section id="applications" class="level3">
+<h3 class="anchored" data-anchor-id="applications">Applications</h3>
+<p><img src="assets/L6_app1.png" class="img-fluid"></p>
+<p>Let us look now at a couple of applications of the previous network analysis metrics. First we focus on the use of nodes and centrality metrics, considering the Game of Thrones sequence of novels by George RR Martin. For each book of the saga, we can represent each character with a node, and the interaction between two characters with an edge. This data set has been created by the applied mathematician Andrew Beveridge and his student Jie Shan. In the data set, the edges are weighted based on the number of interactions between the two characters. But for most of this lesson, we will ignore the weights and consider the unweighted and undirected network. Combining all the interactions across the five books, we get the network that is shown in the visualization at the left.</p>
+<p>For now, you can ignore the colors, they refer to community, something that we will discuss later. Suppose you have not read the books or watch the TV show, how would you analyze this network to identify the most important characters?</p>
+<p><img src="assets/L6_app2.png" class="img-fluid"></p>
+<p>This table shows the top six characters according to five different centrality metrics we discussed earlier. The degree centrality, the weight degree or strength of a node. The eigenvector centrality, the PageRank centrality and the shortest path betweenness centrality. For each metric, the visualization shows the rank of the corresponding character according to that metric. As you see Jon is the leading character according to PageRank and betweenness centrality. While Tyrion is the leading character according to degree, strength and eigenvector centrality. For those of you who are familiar with the story, this is not very surprising. Jon and Tyrion are probably the two most important characters in the saga, and they had many more interactions with almost all the import characters.</p>
+<p>Note that there can be quite a large variation in the rank of a node depending on the centrality metric. For instance the Daenerys is rank three according to the betweenness centrality, but 11th according to degree centrality. This may be because in the first few books, she did not have direct interactions with the rest of the characters in Westeros.</p>
+<p><img src="assets/L6_app3.png" class="img-fluid"></p>
+<p>Finally, let us look at an application of the Tao core concept that was introduced earlier in this lesson. Recall that C.elegans is a microscopic worm, and it’s a dire brain consists only of about 300 neurons. Additionally, the writing diagram of those neurons is fully mapped. So we know all the chemical and electrical synopsis between the neurons of C.elegans. Some neurons are sensory, meaning that they are directly connected to sensory inputs and they deliver information from the outside world to the brain. For example if the worm smells odors or it is touched at certain body parts, specific sensory neurons will fire. Other cells are motor neurons, and they are directed connected to the muscles of this microscopic organism causing motions, and all other body actions. There are also some interneurons that are transforming the sensory input to output. In a recent study, we analyze this neural network considering all fit forward paths from sensory to motor neurons. This set of paths was then analyzed using the Tao core algorithm we discussed earlier in this lesson.</p>
+<p><img src="assets/L6_app4.png" class="img-fluid"></p>
+<p>It turns out that a small set of about ten interneurons thast you see here is sufficient to cover 90% of all sensory to motor paths in the brain of C.elegans. This list of neurons is shown here. Most of these interneurons were previously known to neuroscientists as important commands neurons based on ablation studies or circuit level studies. The new analysis based on the Tao core method provides a different way to understand all of these ten inter neurons. Their activity as a group, compressed all the information provided by the about 100 sensory neurons to a much lower dimension space which is represented by the activity of only 10 cells. Then this compressed representation is used to drive all the output behavior secrets of the organism that involve about 100 motor neurons. In other words, it appeaars that C.elegans deploy an encoder/decoder architecture similar to the architecture of deep artificial neural nets that first reduce the dimensionally of their inputs before computing typically much larger dimensionally output vector.</p>
+<p>You can find additional details about the C.Elegans network analysis mentioned here in the following paper: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007526">The hourglass organization of the Caenorhabditis elegans connectome</a> by K. Sabrin et al, PLOS Computational Biology, 2020.</p>
+</section>
+<section id="lesson-summary" class="level3">
+<h3 class="anchored" data-anchor-id="lesson-summary">Lesson Summary</h3>
+<p>This lesson introduced you to a toolbox of network analysis that you can use any time you want to identify the most important nodes or edges of the network, to rank nodes or edges in terms of importance, or to identify the most important groups of nodes.</p>
+<p>The collection of centrality metrics and core-group detection algorithms we reviewed is not comprehensive of course. You can find many more such metrics in the literature, depending on the specific notion of importance in the problem you study. In some cases, you may even need to define your own metric.</p>
+<p>In practice, applying a wide collection of centrality metrics and core-group detection algorithms is one of the first steps we perform whenever we are given a new network dataset. Such a preliminary analysis helps to identify the nodes or edges that stand out in the network, at least according to one of these metrics.</p>
+<!-- Dummy line -->
+<!-- {% include embed/youtube.html%} -->
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dnouri3\.github\.io\/gt-network-science-notes\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecture-5.html" class="pagination-link" aria-label="Lecture 5">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lecture 5</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecture-7.html" class="pagination-link" aria-label="Lecture 7">
+        <span class="nav-page-text">Lecture 7</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
